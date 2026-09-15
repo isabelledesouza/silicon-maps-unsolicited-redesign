@@ -1,0 +1,25 @@
+{
+  "name": "silicon-maps-unsolicited-redesign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isabelledesouza/silicon-maps-unsolicited-redesign.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isabelledesouza/silicon-maps-unsolicited-redesign/issues"
+  },
+  "homepage": "https://github.com/isabelledesouza/silicon-maps-unsolicited-redesign#readme",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3"
+  }
+}
