@@ -3,239 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dist/output.css">
-    <title>Document</title>
+    <title>Silicon Maps</title>
+    <style>
+      .container-line {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @media (min-width: 640px) {
+        .container-line { max-width: none; }
+      }
+      @media (min-width: 1024px) {
+        .container-line { max-width: 1280px; }
+      }
+    </style>
 </head>
-<body class="font-[-apple-system,_'Helvetica_Neue',_Arial,_sans-serif] text-[#111111] bg-[#FAF9F6] max-w-[390px] sm:max-w-none lg:max-w-[1280px] w-full mx-auto border-x border-[#E4E1D9] sm:border-x-0">
- 
-  <header class="flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5 lg:py-6 border-b border-[#E4E1D9] sticky top-0 bg-[#FAF9F6] z-10">
-    <div>
-      <span class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[18px]">Silicon Maps</span>
-      <span class="text-[10px] text-[#6B6B66] block">We put your business on the map</span>
+    <body class="font-sans text-ink bg-off-white">
+
+  <header class="text-silicon-blue border-b border-blue-light sticky top-0 bg-off-white z-100 w-full">
+    <div class="container-line flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5 lg:py-6">
+
+      <div>
+        <span class="font-display font-semibold text-[18px] text-silicon-blue">
+          Silicon Maps
+        </span>
+        <span class="text-[10px] text-silicon-blue block">
+          We put your business on the map
+        </span>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-8 text-[14px]">
+        <a href="#" class="text-silicon-blue no-underline hover:text-blue-medium">About us</a>
+        <a href="#" class="text-silicon-blue no-underline hover:text-blue-medium">Maps</a>
+        <a href="#" class="text-silicon-blue no-underline hover:text-blue-medium">Members</a>
+        <a href="#" class="text-silicon-blue no-underline hover:text-blue-medium">Packages</a>
+        <a href="#" class="text-silicon-blue no-underline hover:text-blue-medium">Contact us</a>
+      </nav>
+
+      <a class="hidden lg:inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center hover:bg-blue-medium">
+        Become a sponsor
+      </a>
+
+      <button
+        class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
+        onclick="const el=document.getElementById('drawer'); el.classList.toggle('hidden'); el.classList.toggle('flex');">
+        <span class="w-5 h-[1.5px] bg-off-white block"></span>
+        <span class="w-5 h-[1.5px] bg-off-white block"></span>
+        <span class="w-5 h-[1.5px] bg-off-white block"></span>
+      </button>
     </div>
- 
-    <nav class="hidden lg:flex items-center gap-8 text-[14px]">
-      <a href="#" class="text-inherit no-underline">About us</a>
-      <a href="#" class="text-inherit no-underline">Maps</a>
-      <a href="#" class="text-inherit no-underline">Members</a>
-      <a href="#" class="text-inherit no-underline">Packages</a>
-      <a href="#" class="text-inherit no-underline">Contact us</a>
-    </nav>
- 
-    <a class="hidden lg:inline-block bg-[#111111] text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center">Become a sponsor</a>
- 
-    <button class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
-      onclick="const el=document.getElementById('drawer'); el.classList.toggle('hidden'); el.classList.toggle('flex');">
-      <span class="w-5 h-[1.5px] bg-[#111111] block"></span>
-      <span class="w-5 h-[1.5px] bg-[#111111] block"></span>
-      <span class="w-5 h-[1.5px] bg-[#111111] block"></span>
-    </button>
   </header>
- 
-  <nav id="drawer" class="hidden lg:hidden flex-col px-5 py-5 sm:px-8 border-b border-[#E4E1D9] gap-4 text-[15px]">
-    <a href="#" class="text-inherit no-underline">About us</a>
-    <a href="#" class="text-inherit no-underline">Maps</a>
-    <a href="#" class="text-inherit no-underline">Members</a>
-    <a href="#" class="text-inherit no-underline">Packages</a>
-    <a href="#" class="text-inherit no-underline">Contact us</a>
-    <a class="inline-block bg-[#111111] text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center mt-2 w-fit">Become a sponsor</a>
+
+  <nav
+    id="drawer"
+    class="hidden lg:hidden flex-col px-5 py-5 sm:px-8 border-b border-blue-light gap-4 text-[15px] w-full">
+    <a href="#" class="text-ink no-underline">About us</a>
+    <a href="#" class="text-ink no-underline">Maps</a>
+    <a href="#" class="text-ink no-underline">Members</a>
+    <a href="#" class="text-ink no-underline">Packages</a>
+    <a href="#" class="text-ink no-underline">Contact us</a>
+    <a class="inline-block bg-silicon-blue text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center mt-2 w-fit hover:bg-blue-medium">
+      Become a sponsor
+    </a>
   </nav>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-12 lg:py-16 border-b border-[#E4E1D9]">
-    <div class="lg:flex lg:items-center lg:gap-14">
-      <div class="lg:flex-1">
-        <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[10px]">Since 1989</div>
-        <h1 class="font-[Georgia,_'Times_New_Roman',_serif] font-normal leading-[1.15] text-[28px] sm:text-[34px] lg:text-[42px] mb-4 lg:max-w-[420px]">More than a map. A piece of Silicon Valley history.</h1>
-        <p class="text-[14px] text-[#6B6B66] leading-[1.6] mb-[22px] lg:max-w-[420px]">For over 30 years, Silicon Maps has connected leading technology companies with the ecosystem that defines them.</p>
-        <a class="inline-block bg-[#111111] text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center">Become a sponsor</a>
-      </div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] text-[#6B6B66] text-[12px] flex items-center justify-center text-center px-4 py-[60px] h-[200px] sm:h-[260px] mt-7 lg:mt-0 lg:flex-1 lg:h-[340px] lg:py-0">real map image goes here</div>
-    </div>
-  </section>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-12 lg:py-14 border-b border-[#E4E1D9]">
-    <div class="text-center text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[18px]">Trusted by leading companies</div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-[10px] sm:gap-4">
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-4 text-center text-[12px] text-[#6B6B66]">Logo</div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-4 text-center text-[12px] text-[#6B6B66]">Logo</div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-4 text-center text-[12px] text-[#6B6B66]">Logo</div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-4 text-center text-[12px] text-[#6B6B66]">Logo</div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-4 text-center text-[12px] text-[#6B6B66] col-span-2 sm:col-span-1">Logo</div>
-    </div>
-  </section>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-12 lg:py-16 border-b border-[#E4E1D9]">
-    <div class="lg:flex lg:gap-14">
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] text-[#6B6B66] text-[12px] flex items-center justify-center text-center px-4 h-[220px] sm:h-[280px] mb-6 lg:mb-0 lg:flex-1 lg:h-auto">real photo: Silicon Valley map on Times Square billboard</div>
-      <div class="lg:flex-1">
-        <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[10px]">On the map</div>
-        <h2 class="font-[Georgia,_'Times_New_Roman',_serif] font-normal leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px]">Global reach, decades in the making.</h2>
-        <p class="text-[14px] text-[#6B6B66] leading-[1.6] mb-4">Silicon Maps publishes physical and digital maps of the world's leading technology regions, distributed at major events, trade shows, airports, and corporate offices.</p>
-        <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-4 text-[13px] leading-[1.5] mt-2">In 2025, the map appeared on a billboard in Times Square, seen by millions of visitors daily.</div>
-      </div>
-    </div>
- 
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 sm:mt-10 lg:mt-12 lg:pt-10 lg:border-t lg:border-[#E4E1D9]">
-      <div>
-        <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[6px]">Reach</div>
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[26px]">75,000+</div>
-        <div class="text-[12px] text-[#6B6B66] mt-[2px]">maps distributed annually</div>
-      </div>
-      <div>
-        <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[6px]">Visibility</div>
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[26px]">95%</div>
-        <div class="text-[12px] text-[#6B6B66] mt-[2px]">professional environments</div>
-      </div>
-      <div>
-        <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[6px]">Always on</div>
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[26px]">365</div>
-        <div class="text-[12px] text-[#6B6B66] mt-[2px]">days of visibility</div>
-      </div>
-      <div>
-        <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[6px]">Global</div>
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[26px]">2</div>
-        <div class="text-[12px] text-[#6B6B66] mt-[2px]">airport locations</div>
-      </div>
-    </div>
-    <a class="mt-6 text-[14px] font-semibold border-b border-[#111111] inline-block pb-[2px]">Get your company on the map →</a>
-  </section>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-12 lg:py-16 border-b border-[#E4E1D9]">
-    <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[10px]">Heritage</div>
-    <h2 class="font-[Georgia,_'Times_New_Roman',_serif] font-normal leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] lg:mb-8">A map that became part of Silicon Valley's story.</h2>
- 
-    <div class="lg:flex lg:gap-14">
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] text-[#6B6B66] text-[12px] flex items-center justify-center text-center px-4 h-[200px] sm:h-[260px] mb-6 relative lg:mb-0 lg:flex-1 lg:h-auto">
-        historical video / old map
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#111111] text-white flex items-center justify-center text-[14px]">▶</div>
-      </div>
- 
-      <div class="my-6 sm:my-8 lg:my-0 lg:flex-1 border-l border-[#E4E1D9] pl-[18px]">
-        <div class="relative mb-[22px] last:mb-0 before:content-[''] before:absolute before:left-[-22.5px] before:top-[5px] before:w-2 before:h-2 before:rounded-full before:bg-[#111111]">
-          <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[16px] mb-[3px]">1989</div>
-          <div class="text-[13px] text-[#6B6B66]">The first Silicon Valley map is created.</div>
-        </div>
-        <div class="relative mb-[22px] last:mb-0 before:content-[''] before:absolute before:left-[-22.5px] before:top-[5px] before:w-2 before:h-2 before:rounded-full before:bg-[#E4E1D9] before:border before:border-[#6B6B66]">
-          <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[16px] mb-[3px]">2000s</div>
-          <div class="text-[13px] text-[#6B6B66]">The ecosystem grows.</div>
-        </div>
-        <div class="relative mb-[22px] last:mb-0 before:content-[''] before:absolute before:left-[-22.5px] before:top-[5px] before:w-2 before:h-2 before:rounded-full before:bg-[#E4E1D9] before:border before:border-[#6B6B66]">
-          <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[16px] mb-[3px]">Today</div>
-          <div class="text-[13px] text-[#6B6B66]">The map continues to evolve.</div>
+
+  <!-- HERO: fundo azul full-bleed (fora do container) + pôster/texto dentro do container-line -->
+  <section class="hero relative">
+
+    <!-- Fundo azul: ocupa a tela toda; a partir do sm, ocupa a linha de 55% da grid -->
+    <div class="w-full bg-silicon-blue relative overflow-hidden">
+      <img
+        src="./assets/golden-gate-bridge.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
+      />
+      <div class="relative z-10 container-line flex flex-col items-center text-center px-5 pt-10 pb-36 sm:px-8 sm:pt-14 sm:pb-44 lg:pt-16 lg:pb-52">
+        <div class="max-w-[560px]">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-white mb-[10px]">Since 1989</div>
+          <h1 class="font-display font-semibold leading-[1.15] text-[28px] sm:text-[34px] lg:text-[48px] mb-4 text-white">
+            More than a map. A piece of Silicon Valley history.
+          </h1>
+          <a class="inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[16px] rounded-[2px]">View all map →
+          </a>
         </div>
       </div>
     </div>
- 
-    <div class="lg:flex lg:items-end lg:justify-between lg:gap-10 border-t border-[#E4E1D9] pt-5 mt-6">
-      <div class="font-[Georgia,_'Times_New_Roman',_serif] italic text-[14px] leading-[1.6] text-[#111111]">
-        "Growing up in the 90s, I remember visiting my dad's company and seeing the iconic map."
-        <span class="not-italic text-[12px] text-[#6B6B66] block mt-2">— site visitor</span>
-      </div>
-      <a class="text-[14px] font-semibold border-b border-[#111111] pb-[2px] block mt-5 lg:mt-0 w-fit shrink-0">Explore our story →</a>
-    </div>
-  </section>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-12 lg:py-16 border-b border-[#E4E1D9]">
-    <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[10px] text-center">Who's on the map</div>
-    <h2 class="font-[Georgia,_'Times_New_Roman',_serif] font-normal leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] text-center">The companies shaping Silicon Valley.</h2>
-    <div class="mt-6 sm:mt-8 lg:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-5 mb-[14px] sm:mb-0">
-        <div class="text-[11px] tracking-[0.06em] uppercase text-[#6B6B66] mb-[14px]">Company logo</div>
-        <p class="font-[Georgia,_'Times_New_Roman',_serif] italic text-[14px] leading-[1.5] mb-[14px]">"Testimonial from this company..."</p>
-        <div class="text-[12px] text-[#6B6B66]">Name / title</div>
-      </div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-5 mb-[14px] sm:mb-0">
-        <div class="text-[11px] tracking-[0.06em] uppercase text-[#6B6B66] mb-[14px]">Company logo</div>
-        <p class="font-[Georgia,_'Times_New_Roman',_serif] italic text-[14px] leading-[1.5] mb-[14px]">"Testimonial from this company..."</p>
-        <div class="text-[12px] text-[#6B6B66]">Name / title</div>
-      </div>
-      <div class="bg-[#F1EFE9] border border-[#E4E1D9] p-5 mb-[14px] sm:mb-0">
-        <div class="text-[11px] tracking-[0.06em] uppercase text-[#6B6B66] mb-[14px]">Company logo</div>
-        <p class="font-[Georgia,_'Times_New_Roman',_serif] italic text-[14px] leading-[1.5] mb-[14px]">"Testimonial from this company..."</p>
-        <div class="text-[12px] text-[#6B6B66]">Name / title</div>
+
+    <!-- Pôster + texto: empilhado até sm; a partir do sm vira row (linha de 45% da grid), mapa 45% + gap-10 + texto no resto, alinhado à esquerda até a margem direita -->
+    <div class="container-line px-5 sm:px-8 relative z-10">
+      <div class="flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left sm:gap-10">
+
+        <div class="w-[200px] sm:w-[32%] -mt-24 sm:-mt-32 lg:-mt-40">
+          <img
+            src="./assets/iframe-sillicon-valley-1989.png"
+            alt="Welcome to Silicon Valley, 1989 calendar poster"
+            class="w-full"
+          />
+          <p class="text-[11px] text-blue-medium text-center mt-2">Welcome to Silicon Valley, 1989.</p>
+        </div>
+
+        <div class="sm:flex-1 pt-6 pb-10 sm:pb-14">
+          <p class="text-[18px] sm:text-[20px] lg:text-[24px] text-silicon-blue leading-[1.6]">
+            For over 30 years, Silicon Maps has
+            <span class="font-semibold italic">connected</span>
+            leading technology companies with the ecosystem that defines them.
+          </p>
+          <a href="#" class="italic text-[16px] text-silicon-blue mt-4 inline-block">Explore our story →</a>
+          <p aria-hidden="true" class="text-[64px] lg:text-[120px] leading-none text-right opacity-20 mt-8 lg:mt-12">Heritage</p>
+        </div>
+
       </div>
     </div>
-    <a class="block text-center mt-5 sm:mt-8 lg:mt-10 text-[14px] font-semibold border-b border-[#111111] pb-[2px] w-fit mx-auto">See who's on the map →</a>
+
   </section>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-12 lg:py-16 border-b border-[#E4E1D9]">
-    <div class="text-[11px] tracking-[0.08em] uppercase text-[#6B6B66] mb-[10px] text-center">How it works</div>
-    <h2 class="font-[Georgia,_'Times_New_Roman',_serif] font-normal leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] text-center">Getting your company on the map.</h2>
-    <div class="mt-6 sm:mt-8 lg:mt-10 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10">
-      <div class="flex gap-[14px] py-[18px] border-t border-[#E4E1D9] first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[15px] text-[#6B6B66] min-w-6">01</div>
+
+  <!-- SECTION: Global reach — texto primeiro, duas imagens sobrepostas depois -->
+  <section class="global border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-16">
+
+      <div class="lg:flex lg:gap-14 lg:items-center">
+
+        <!-- Texto: agora vem primeiro -->
+        <div class="lg:flex-1 mb-10 lg:mb-0">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[10px]">On the map</div>
+          <h2 class="font-display font-semibold leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] text-silicon-blue">
+            Global reach, decades in the making.
+          </h2>
+          <p class="text-[14px] text-ink leading-[1.6] mb-4">
+            Silicon Maps publishes physical and digital maps of the world's leading technology regions, distributed at major events, trade shows, airports, and corporate offices.
+          </p>
+          <a class="mt-2 mb-6 text-[14px] font-semibold text-silicon-blue border-b border-signal-orange inline-block pb-[2px]">
+            Get your company on the map →
+          </a>
+        </div>
+
+        <!-- Duas imagens sobrepostas: contidas no mobile/tablet, vazando só a partir do lg -->
+        <div class="lg:flex-1 relative h-[240px] sm:h-[300px] lg:h-[380px]">
+
+          <!-- Imagem de trás -->
+          <div class="absolute -top-8 right-0 w-[65%] h-[75%] sm:w-[60%] sm:h-[78%] bg-blue-light border border-blue-medium overflow-hidden">
+            <img
+              src="./assets/conference-photo.jpg"
+              alt="Silicon Maps displayed at a technology conference"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Imagem da frente (pequena), sobreposta no canto inferior esquerdo -->
+          <div class="absolute bottom-0 left-0 z-10 w-[75%] h-[100%] sm:w-[70%] sm:h-[106%]  lg:translate-y-[7%] bg-blue-light border border-blue-medium overflow-hidden shadow-xl">
+            <img
+              src="./assets/two-people-look-silicon-valley-map.jpg"
+              alt="Detail of the Silicon Maps poster"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION: Stats, separada -->
+  <section class="stats border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-14">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
         <div>
-          <h3 class="text-[15px] mb-[5px] font-[-apple-system,_'Helvetica_Neue',_Arial,_sans-serif] font-semibold">Choose your package</h3>
-          <p class="text-[13px] text-[#6B6B66] leading-[1.5]">Choose the visibility options that fit your company.</p>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Reach</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">75,000+</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">maps distributed annually</div>
         </div>
-      </div>
-      <div class="flex gap-[14px] py-[18px] border-t border-[#E4E1D9] first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[15px] text-[#6B6B66] min-w-6">02</div>
         <div>
-          <h3 class="text-[15px] mb-[5px] font-[-apple-system,_'Helvetica_Neue',_Arial,_sans-serif] font-semibold">Send your artwork</h3>
-          <p class="text-[13px] text-[#6B6B66] leading-[1.5]">Submit your vector logo and placement specs.</p>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Visibility</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">95%</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">professional environments</div>
         </div>
-      </div>
-      <div class="flex gap-[14px] py-[18px] border-t border-[#E4E1D9] first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[15px] text-[#6B6B66] min-w-6">03</div>
         <div>
-          <h3 class="text-[15px] mb-[5px] font-[-apple-system,_'Helvetica_Neue',_Arial,_sans-serif] font-semibold">Approve your proof</h3>
-          <p class="text-[13px] text-[#6B6B66] leading-[1.5]">Our art department prepares your placement for approval.</p>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Always on</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">365</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">days of visibility</div>
         </div>
-      </div>
-      <div class="flex gap-[14px] py-[18px] border-t border-[#E4E1D9] first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
-        <div class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[15px] text-[#6B6B66] min-w-6">04</div>
         <div>
-          <h3 class="text-[15px] mb-[5px] font-[-apple-system,_'Helvetica_Neue',_Arial,_sans-serif] font-semibold">Get on the map</h3>
-          <p class="text-[13px] text-[#6B6B66] leading-[1.5]">Your company appears on the printed map.</p>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Global</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">2</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">airport locations</div>
         </div>
       </div>
     </div>
-    <a class="block text-center mt-2 sm:mt-8 lg:mt-10 text-[14px] font-semibold border-b border-[#111111] pb-[2px] w-fit mx-auto">View packages →</a>
   </section>
- 
-  <section class="px-5 py-10 sm:px-8 sm:py-14 lg:py-20 border-b border-[#E4E1D9] bg-[#F1EFE9] text-center">
-    <h2 class="font-[Georgia,_'Times_New_Roman',_serif] font-normal leading-[1.15] text-[24px] sm:text-[28px] lg:text-[32px] mb-3">Put your company on the map.</h2>
-    <p class="text-[14px] text-[#6B6B66] mb-[22px] leading-[1.6] sm:max-w-[460px] sm:mx-auto">Join leading technology companies and increase your visibility across the Silicon Valley ecosystem.</p>
-    <a class="inline-block bg-[#111111] text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center w-full sm:w-auto">Become a sponsor →</a>
-  </section>
- 
-  <footer class="px-5 py-8 sm:px-8 sm:py-10 lg:py-14">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="mb-7 sm:mb-0">
-        <span class="font-[Georgia,_'Times_New_Roman',_serif] font-normal text-[18px] mb-2 block">Silicon Maps</span>
-        <p class="text-[13px] text-[#6B6B66] leading-[1.5]">We put your business on the map, helping companies get discovered across the world's leading tech and life sciences hubs.</p>
+
+  <section class="trusted border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-14">
+
+      <div class="text-center text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[18px]">
+        Trusted by leading companies
       </div>
- 
-      <div>
-        <h4 class="text-[13px] mb-3">Quick links</h4>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">About us</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Our history</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Maps</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Members</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Press</a>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-[10px] sm:gap-4">
+        <div class="bg-blue-light border border-blue-medium p-4 text-center text-[12px] text-silicon-blue">Logo</div>
+        <div class="bg-blue-light border border-blue-medium p-4 text-center text-[12px] text-silicon-blue">Logo</div>
+        <div class="bg-blue-light border border-blue-medium p-4 text-center text-[12px] text-silicon-blue">Logo</div>
+        <div class="bg-blue-light border border-blue-medium p-4 text-center text-[12px] text-silicon-blue">Logo</div>
+        <div class="bg-blue-light border border-blue-medium p-4 text-center text-[12px] text-silicon-blue col-span-2 sm:col-span-1">Logo</div>
       </div>
- 
-      <div>
-        <h4 class="text-[13px] mb-3">Resources</h4>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Podcast</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">FAQ</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Listing requirements</a>
-        <a href="#" class="block text-[13px] text-[#6B6B66] mb-[10px]">Contact us</a>
-      </div>
- 
-      <div>
-        <h4 class="text-[13px] mb-3">Get listed</h4>
-        <p class="text-[13px] text-[#6B6B66] leading-[1.5] mb-[10px]">Join the companies already visible to buyers and investors browsing our maps.</p>
-        <a class="text-[13px] font-semibold mt-1 block">▶ Listen to the podcast</a>
-      </div>
+
     </div>
- 
-    <div class="flex justify-between text-[11px] text-[#6B6B66] border-t border-[#E4E1D9] pt-[18px] mt-7">
-      <span>© 2026 Silicon Maps. All rights reserved.</span>
-      <span>Terms of use</span>
+  </section>
+
+  <section class="billboard border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-16">
+
+      <div class="lg:flex lg:gap-14">
+
+        <div class="bg-blue-light border border-blue-medium text-blue-medium text-[12px] flex items-center justify-center text-center px-4 h-[220px] sm:h-[280px] mb-6 lg:mb-0 lg:flex-1 lg:h-auto">
+          real photo: Silicon Valley map on Times Square billboard
+        </div>
+
+        <div class="lg:flex-1">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[10px]">On the map</div>
+          <h2 class="font-display font-semibold leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] text-silicon-blue">
+            Global reach, decades in the making.
+          </h2>
+          <p class="text-[14px] text-ink leading-[1.6] mb-4">
+            Silicon Maps publishes physical and digital maps of the world's leading technology regions, distributed at major events, trade shows, airports, and corporate offices.
+          </p>
+          <div class="bg-blue-light border border-blue-medium p-4 text-[13px] leading-[1.5] mt-2 text-ink">
+            In 2025, the map appeared on a billboard in Times Square, seen by millions of visitors daily.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 sm:mt-10 lg:mt-12 lg:pt-10 lg:border-t lg:border-blue-light">
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Reach</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">75,000+</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">maps distributed annually</div>
+        </div>
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Visibility</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">95%</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">professional environments</div>
+        </div>
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Always on</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">365</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">days of visibility</div>
+        </div>
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[6px]">Global</div>
+          <div class="font-display font-semibold text-[26px] text-silicon-blue">2</div>
+          <div class="text-[12px] text-blue-medium mt-[2px]">airport locations</div>
+        </div>
+      </div>
+
+      <a class="mt-6 text-[14px] font-semibold text-silicon-blue border-b border-signal-orange inline-block pb-[2px]">
+        Get your company on the map →
+      </a>
+
+    </div>
+  </section>
+
+  <section class="heritage border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-16">
+
+      <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[10px]">Heritage</div>
+      <h2 class="font-display font-semibold leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] lg:mb-8 text-silicon-blue">
+        A map that became part of Silicon Valley's story.
+      </h2>
+
+      <div class="lg:flex lg:gap-14">
+        <div class="bg-blue-light border border-blue-medium text-blue-medium text-[12px] flex items-center justify-center text-center px-4 h-[200px] sm:h-[260px] mb-6 relative lg:mb-0 lg:flex-1 lg:h-auto">
+          historical video / old map
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-silicon-blue text-white flex items-center justify-center text-[14px]">▶</div>
+        </div>
+
+        <div class="my-6 sm:my-8 lg:my-0 lg:flex-1 border-l border-blue-light pl-[18px]">
+          <div class="relative mb-[22px] last:mb-0 before:content-[''] before:absolute before:left-[-22.5px] before:top-[5px] before:w-2 before:h-2 before:rounded-full before:bg-signal-orange">
+            <div class="font-display font-semibold text-[16px] mb-[3px] text-silicon-blue">1989</div>
+            <div class="text-[13px] text-blue-medium">The first Silicon Valley map is created.</div>
+          </div>
+          <div class="relative mb-[22px] last:mb-0 before:content-[''] before:absolute before:left-[-22.5px] before:top-[5px] before:w-2 before:h-2 before:rounded-full before:bg-blue-light before:border before:border-blue-medium">
+            <div class="font-display font-semibold text-[16px] mb-[3px] text-silicon-blue">2000s</div>
+            <div class="text-[13px] text-blue-medium">The ecosystem grows.</div>
+          </div>
+          <div class="relative mb-[22px] last:mb-0 before:content-[''] before:absolute before:left-[-22.5px] before:top-[5px] before:w-2 before:h-2 before:rounded-full before:bg-blue-light before:border before:border-blue-medium">
+            <div class="font-display font-semibold text-[16px] mb-[3px] text-silicon-blue">Today</div>
+            <div class="text-[13px] text-blue-medium">The map continues to evolve.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:flex lg:items-end lg:justify-between lg:gap-10 border-t border-blue-light pt-5 mt-6">
+        <div class="font-sans italic text-[14px] leading-[1.6] text-ink">
+          "Growing up in the 90s, I remember visiting my dad's company and seeing the iconic map."
+          <span class="not-italic text-[12px] text-blue-medium block mt-2">— site visitor</span>
+        </div>
+        <a class="text-[14px] font-semibold text-silicon-blue border-b border-signal-orange pb-[2px] block mt-5 lg:mt-0 w-fit shrink-0">
+          Explore our story →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="companies border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-16">
+
+      <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[10px] text-center">Who's on the map</div>
+      <h2 class="font-display font-semibold leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] text-center text-silicon-blue">
+        The companies shaping Silicon Valley.
+      </h2>
+
+      <div class="mt-6 sm:mt-8 lg:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-blue-light border border-blue-medium p-5 mb-[14px] sm:mb-0">
+          <div class="text-[11px] tracking-[0.06em] uppercase text-blue-medium mb-[14px]">Company logo</div>
+          <p class="font-sans italic text-[14px] leading-[1.5] mb-[14px] text-ink">"Testimonial from this company..."</p>
+          <div class="text-[12px] text-blue-medium">Name / title</div>
+        </div>
+        <div class="bg-blue-light border border-blue-medium p-5 mb-[14px] sm:mb-0">
+          <div class="text-[11px] tracking-[0.06em] uppercase text-blue-medium mb-[14px]">Company logo</div>
+          <p class="font-sans italic text-[14px] leading-[1.5] mb-[14px] text-ink">"Testimonial from this company..."</p>
+          <div class="text-[12px] text-blue-medium">Name / title</div>
+        </div>
+        <div class="bg-blue-light border border-blue-medium p-5 mb-[14px] sm:mb-0">
+          <div class="text-[11px] tracking-[0.06em] uppercase text-blue-medium mb-[14px]">Company logo</div>
+          <p class="font-sans italic text-[14px] leading-[1.5] mb-[14px] text-ink">"Testimonial from this company..."</p>
+          <div class="text-[12px] text-blue-medium">Name / title</div>
+        </div>
+      </div>
+
+      <a class="block text-center mt-5 sm:mt-8 lg:mt-10 text-[14px] font-semibold text-silicon-blue border-b border-signal-orange pb-[2px] w-fit mx-auto">
+        See who's on the map →
+      </a>
+
+    </div>
+  </section>
+
+  <section class="how-it-works border-b border-blue-light w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-12 lg:py-16">
+
+      <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-[10px] text-center">How it works</div>
+      <h2 class="font-display font-semibold leading-[1.15] text-[24px] sm:text-[27px] lg:text-[30px] mb-[14px] text-center text-silicon-blue">
+        Getting your company on the map.
+      </h2>
+
+      <div class="mt-6 sm:mt-8 lg:mt-10 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10">
+        <div class="flex gap-[14px] py-[18px] border-t border-blue-light first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
+          <div class="font-display font-semibold text-[15px] text-blue-medium min-w-6">01</div>
+          <div>
+            <h3 class="text-[15px] mb-[5px] font-sans font-semibold text-silicon-blue">Choose your package</h3>
+            <p class="text-[13px] text-ink leading-[1.5]">Choose the visibility options that fit your company.</p>
+          </div>
+        </div>
+        <div class="flex gap-[14px] py-[18px] border-t border-blue-light first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
+          <div class="font-display font-semibold text-[15px] text-blue-medium min-w-6">02</div>
+          <div>
+            <h3 class="text-[15px] mb-[5px] font-sans font-semibold text-silicon-blue">Send your artwork</h3>
+            <p class="text-[13px] text-ink leading-[1.5]">Submit your vector logo and placement specs.</p>
+          </div>
+        </div>
+        <div class="flex gap-[14px] py-[18px] border-t border-blue-light first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
+          <div class="font-display font-semibold text-[15px] text-blue-medium min-w-6">03</div>
+          <div>
+            <h3 class="text-[15px] mb-[5px] font-sans font-semibold text-silicon-blue">Approve your proof</h3>
+            <p class="text-[13px] text-ink leading-[1.5]">Our art department prepares your placement for approval.</p>
+          </div>
+        </div>
+        <div class="flex gap-[14px] py-[18px] border-t border-blue-light first:border-t-0 sm:flex-col sm:gap-2 sm:py-0 sm:border-t-0">
+          <div class="font-display font-semibold text-[15px] text-blue-medium min-w-6">04</div>
+          <div>
+            <h3 class="text-[15px] mb-[5px] font-sans font-semibold text-silicon-blue">Get on the map</h3>
+            <p class="text-[13px] text-ink leading-[1.5]">Your company appears on the printed map.</p>
+          </div>
+        </div>
+      </div>
+
+      <a class="block text-center mt-2 sm:mt-8 lg:mt-10 text-[14px] font-semibold text-silicon-blue border-b border-signal-orange pb-[2px] w-fit mx-auto">
+        View packages →
+      </a>
+
+    </div>
+  </section>
+
+  <section class="cta bg-blue-light border-b border-blue-light text-center w-full">
+    <div class="container-line px-5 py-10 sm:px-8 sm:py-14 lg:py-20">
+      <h2 class="font-display font-semibold leading-[1.15] text-[24px] sm:text-[28px] lg:text-[32px] mb-3 text-silicon-blue">
+        Put your company on the map.
+      </h2>
+      <p class="text-[14px] text-ink mb-[22px] leading-[1.6] sm:max-w-[460px] sm:mx-auto">
+        Join leading technology companies and increase your visibility across the Silicon Valley ecosystem.
+      </p>
+      <a class="inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center w-full sm:w-auto hover:bg-silicon-blue">
+        Become a sponsor →
+      </a>
+    </div>
+  </section>
+
+  <footer class="w-full">
+    <div class="container-line px-5 py-8 sm:px-8 sm:py-10 lg:py-14">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="mb-7 sm:mb-0">
+          <span class="font-display font-semibold text-[18px] mb-2 block text-silicon-blue">Silicon Maps</span>
+          <p class="text-[13px] text-blue-medium leading-[1.5]">
+            We put your business on the map, helping companies get discovered across the world's leading tech and life sciences hubs.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-[13px] mb-3 text-silicon-blue">Quick links</h4>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">About us</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Our history</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Maps</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Members</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Press</a>
+        </div>
+        <div>
+          <h4 class="text-[13px] mb-3 text-silicon-blue">Resources</h4>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Podcast</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">FAQ</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Listing requirements</a>
+          <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Contact us</a>
+        </div>
+        <div>
+          <h4 class="text-[13px] mb-3 text-silicon-blue">Get listed</h4>
+          <p class="text-[13px] text-blue-medium leading-[1.5] mb-[10px]">
+            Join the companies already visible to buyers and investors browsing our maps.
+          </p>
+          <a class="text-[13px] font-semibold text-silicon-blue mt-1 block">▶ Listen to the podcast</a>
+        </div>
+      </div>
+
+      <div class="flex justify-between text-[11px] text-blue-medium border-t border-blue-light pt-[18px] mt-7">
+        <span>© 2026 Silicon Maps. All rights reserved.</span>
+        <span>Terms of use</span>
+      </div>
+
     </div>
   </footer>
- 
-</body>
+
+    </body>
 </html>

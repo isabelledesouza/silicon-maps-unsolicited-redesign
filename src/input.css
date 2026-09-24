@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@theme {
+   --font-display: "Oswald", sans-serif;
+   --font-sans: "Libre Franklin", sans-serif;
+
+  --color-silicon-blue: #123B5D;
+  --color-blue-medium: #2C6E9E;
+  --color-blue-light: #DCEAF2;
+  --color-off-white: #FFF;
+  --color-ink: #18242D;
+  --color-signal-orange: #E06B3C;
+}
