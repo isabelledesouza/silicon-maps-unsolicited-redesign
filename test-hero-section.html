@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dist/output.css">
+    <title>Silicon Maps — Hero test</title>
+</head>
+    <body class="font-sans text-ink bg-off-white">
+
+  <!-- HEADER: fixo e transparente sobre a hero (mostra a ponte); fica azul sólido assim que rolar (script no fim) -->
+  <header id="site-header" class="text-white fixed top-0 left-0 z-100 w-full bg-transparent transition-colors duration-300">
+    <div id="header-bar" class="container-line flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5 lg:py-6">
+
+      <div>
+        <span class="font-display font-semibold text-[18px] text-white">
+          Silicon Maps
+        </span>
+        <span class="text-[10px] text-blue-light block">
+          We put your business on the map
+        </span>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-8 text-[14px]">
+        <a href="#" class="text-white no-underline hover:text-blue-light">About us</a>
+        <a href="#" class="text-white no-underline hover:text-blue-light">Maps</a>
+        <a href="#" class="text-white no-underline hover:text-blue-light">Members</a>
+        <a href="#" class="text-white no-underline hover:text-blue-light">Packages</a>
+        <a href="#" class="text-white no-underline hover:text-blue-light">Contact us</a>
+      </nav>
+
+      <a class="hidden lg:inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center hover:bg-blue-medium">
+        Become a sponsor
+      </a>
+
+      <button
+        class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
+        onclick="toggleDrawer()">
+        <span class="w-5 h-[1.5px] bg-off-white block"></span>
+        <span class="w-5 h-[1.5px] bg-off-white block"></span>
+        <span class="w-5 h-[1.5px] bg-off-white block"></span>
+      </button>
+    </div>
+
+    <nav
+      id="drawer"
+      class="hidden lg:hidden flex-col px-5 py-5 sm:px-8 bg-silicon-blue border-t border-white/10 gap-4 text-[15px] w-full">
+      <a href="#" class="text-white no-underline">About us</a>
+      <a href="#" class="text-white no-underline">Maps</a>
+      <a href="#" class="text-white no-underline">Members</a>
+      <a href="#" class="text-white no-underline">Packages</a>
+      <a href="#" class="text-white no-underline">Contact us</a>
+      <a class="inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center mt-2 w-fit hover:bg-blue-medium">
+        Become a sponsor
+      </a>
+    </nav>
+  </header>
+
+
+  <!-- HERO: fundo azul full-bleed (fora do container) + pôster/texto dentro do container-line -->
+  <section class="hero relative">
+
+    <!-- Fundo azul: ocupa a tela toda e começa atrás do header (padding-top = altura do header + respiro) -->
+    <div id="hero-bg" class="w-full bg-silicon-blue relative overflow-hidden">
+      <!-- Mapa aéreo da Golden Gate: PNG preto no branco, invertido + blend screen = só as ruas claras sobre o azul -->
+      <img
+        src="./assets/arial-golden-gate.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full object-cover invert mix-blend-screen opacity-20 pointer-events-none"
+      />
+      <!-- Grid técnico por cima do mapa (utility hero-grid no input.css) -->
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="relative z-10 container-line flex flex-col items-center text-center px-5 pt-[calc(var(--header-h)+2.5rem)] pb-36 sm:px-8 sm:pt-[calc(var(--header-h)+3.5rem)] sm:pb-44 lg:pt-[calc(var(--header-h)+4rem)] lg:pb-52">
+        <div class="max-w-[560px]">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-white mb-[10px]">Since 1989</div>
+          <h1 class="font-display font-semibold leading-[1.15] text-[28px] sm:text-[34px] lg:text-[48px] mb-4 text-white">
+            More than a map. A piece of Silicon Valley history.
+          </h1>
+          <a class="inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[16px] rounded-[2px]">View all map →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pôster + texto: empilhado até sm; a partir do sm vira row (linha de 45% da grid), mapa 45% + gap-10 + texto no resto, alinhado à esquerda até a margem direita -->
+    <div class="container-line px-5 sm:px-8 relative z-10">
+      <div class="flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left sm:gap-10">
+
+        <div class="w-[200px] sm:w-[32%] -mt-24 sm:-mt-32 lg:-mt-40">
+          <img
+            src="./assets/iframe-sillicon-valley-1989.png"
+            alt="Welcome to Silicon Valley, 1989 calendar poster"
+            class="w-full"
+          />
+          <p class="text-[11px] text-blue-medium text-center mt-2">Welcome to Silicon Valley, 1989.</p>
+        </div>
+
+        <div class="sm:flex-1 pt-6 pb-10 sm:pb-14">
+          <p class="text-[18px] sm:text-[20px] lg:text-[24px] text-silicon-blue leading-[1.6]">
+            For over 30 years, Silicon Maps has
+            <span class="font-semibold italic">connected</span>
+            leading technology companies with the ecosystem that defines them.
+          </p>
+          <a href="#" class="italic text-[16px] text-silicon-blue mt-4 inline-block">Explore our story →</a>
+          <p aria-hidden="true" class="text-[64px] lg:text-[120px] leading-none text-right opacity-20 mt-8 lg:mt-12">Heritage</p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    const header = document.getElementById('site-header');
+    const headerBar = document.getElementById('header-bar');
+    const drawer = document.getElementById('drawer');
+
+    // Header transparente só no topo da página; azul sólido assim que rolar (ou com o menu aberto)
+    function updateHeader() {
+      const scrolled = window.scrollY > 0;
+      const drawerOpen = !drawer.classList.contains('hidden');
+      header.classList.toggle('bg-silicon-blue', scrolled || drawerOpen);
+      header.classList.toggle('bg-transparent', !scrolled && !drawerOpen);
+    }
+
+    function setHeaderHeight() {
+      document.documentElement.style.setProperty('--header-h', headerBar.offsetHeight + 'px');
+      updateHeader();
+    }
+
+    function toggleDrawer() {
+      drawer.classList.toggle('hidden');
+      drawer.classList.toggle('flex');
+      updateHeader();
+    }
+
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('resize', setHeaderHeight);
+    setHeaderHeight();
+  </script>
+
+    </body>
+</html>

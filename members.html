@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="dist/output.css" />
+    <title>Who's on the map · Silicon Maps</title>
+  </head>
+  <body class="font-sans text-ink bg-off-white">
+    <!-- HEADER: nas páginas internas fica sticky e azul sólido desde o topo (o banner logo abaixo também é azul) -->
+    <header
+      id="site-header"
+      class="text-white sticky top-0 z-100 w-full bg-silicon-blue border-b border-off-white/10"
+    >
+      <div
+        id="header-bar"
+        class="container-line flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5 lg:py-6"
+      >
+        <a href="index.html" class="no-underline">
+          <span class="font-display font-semibold text-[18px] text-white">
+            Silicon Maps
+          </span>
+          <span class="text-[10px] text-blue-light block">
+            We put your business on the map
+          </span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8 text-[14px]">
+          <a href="#" class="text-white no-underline hover:text-blue-light"
+            >About us</a
+          >
+          <a href="#" class="text-white no-underline hover:text-blue-light"
+            >Maps</a
+          >
+          <a
+            href="members.html"
+            aria-current="page"
+            class="text-white no-underline border-b border-signal-orange pb-[2px]"
+            >Members</a
+          >
+          <a href="#" class="text-white no-underline hover:text-blue-light"
+            >Packages</a
+          >
+          <a href="#" class="text-white no-underline hover:text-blue-light"
+            >Contact us</a
+          >
+        </nav>
+
+        <a
+          class="hidden lg:inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center hover:bg-blue-medium"
+        >
+          Become a sponsor
+        </a>
+
+        <button
+          class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
+          aria-label="Open menu"
+          onclick="toggleDrawer()"
+        >
+          <span class="w-5 h-[1.5px] bg-off-white block"></span>
+          <span class="w-5 h-[1.5px] bg-off-white block"></span>
+          <span class="w-5 h-[1.5px] bg-off-white block"></span>
+        </button>
+      </div>
+
+      <nav
+        id="drawer"
+        class="hidden lg:hidden flex-col px-5 py-5 sm:px-8 bg-silicon-blue border-t border-white/10 gap-4 text-[15px] w-full"
+      >
+        <a href="#" class="text-white no-underline">About us</a>
+        <a href="#" class="text-white no-underline">Maps</a>
+        <a href="members.html" aria-current="page" class="text-white no-underline">Members</a>
+        <a href="#" class="text-white no-underline">Packages</a>
+        <a href="#" class="text-white no-underline">Contact us</a>
+        <a
+          class="inline-block bg-signal-orange text-white px-[22px] py-[14px] text-[14px] rounded-[2px] text-center mt-2 w-fit hover:bg-blue-medium"
+        >
+          Become a sponsor
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- BANNER: padrão das páginas internas. ~30% da viewport, azul navy com o grid técnico da hero, h1 sempre aqui dentro -->
+      <section class="relative overflow-hidden bg-silicon-blue min-h-[30vh] flex items-center">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="relative z-10 container-line px-5 sm:px-8 py-12">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-light mb-[10px]">
+            Member directory
+          </div>
+          <h1 class="leading-[1.1] text-[32px] md:text-[48px] text-off-white">
+            Who's on the map
+          </h1>
+          <p class="text-base md:text-xl text-blue-light leading-[1.6] mt-3">
+            The companies shaping Silicon Valley.
+          </p>
+        </div>
+      </section>
+
+      <!-- FILTROS: nível 1 = categoria (azul quando ativa), nível 2 = região da categoria escolhida (laranja quando ativa).
+           O estado ativo vem do aria-pressed (variant aria-pressed: do Tailwind), o JS só troca o atributo -->
+      <section class="container-line px-5 sm:px-8 pt-10 sm:pt-12">
+        <div class="grid grid-cols-12 gap-y-6">
+          <div class="col-span-12">
+            <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-3" id="category-label">
+              Category
+            </div>
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2" role="group" aria-labelledby="category-label">
+              <button
+                type="button"
+                data-filter-category="all"
+                aria-pressed="true"
+                class="flex items-center gap-2 px-4 py-3 text-[14px] font-semibold rounded-[2px] border border-silicon-blue text-silicon-blue hover:bg-blue-light aria-pressed:bg-silicon-blue aria-pressed:text-off-white"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0">
+                  <rect x="4" y="4" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1" />
+                </svg>
+                All
+                <span class="ml-auto sm:ml-1 text-[12px] font-normal opacity-70">16</span>
+              </button>
+              <button
+                type="button"
+                data-filter-category="high-tech"
+                aria-pressed="false"
+                class="flex items-center gap-2 px-4 py-3 text-[14px] font-semibold rounded-[2px] border border-silicon-blue text-silicon-blue hover:bg-blue-light aria-pressed:bg-silicon-blue aria-pressed:text-off-white"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0">
+                  <rect x="7" y="7" width="10" height="10" rx="1" /><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" />
+                </svg>
+                High Tech
+                <span class="ml-auto sm:ml-1 text-[12px] font-normal opacity-70">6</span>
+              </button>
+              <button
+                type="button"
+                data-filter-category="international"
+                aria-pressed="false"
+                class="flex items-center gap-2 px-4 py-3 text-[14px] font-semibold rounded-[2px] border border-silicon-blue text-silicon-blue hover:bg-blue-light aria-pressed:bg-silicon-blue aria-pressed:text-off-white"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0">
+                  <circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.5 3.5 8.5s-1 6-3.5 8.5M12 3.5C9.5 6 8.5 9 8.5 12s1 6 3.5 8.5" />
+                </svg>
+                International
+                <span class="ml-auto sm:ml-1 text-[12px] font-normal opacity-70">5</span>
+              </button>
+              <button
+                type="button"
+                data-filter-category="life-sciences"
+                aria-pressed="false"
+                class="flex items-center gap-2 px-4 py-3 text-[14px] font-semibold rounded-[2px] border border-silicon-blue text-silicon-blue hover:bg-blue-light aria-pressed:bg-silicon-blue aria-pressed:text-off-white"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0">
+                  <path d="M8 3c0 6 8 6 8 9s-8 3-8 9M16 3c0 6-8 6-8 9s8 3 8 9M9 7.5h6M9 16.5h6" />
+                </svg>
+                Life Sciences
+                <span class="ml-auto sm:ml-1 text-[12px] font-normal opacity-70">5</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Nível 2: só aparece com uma categoria escolhida; cada categoria tem seu grupo de regiões -->
+          <div id="region-filter" class="hidden col-span-12">
+            <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-3" id="region-label">
+              Region
+            </div>
+
+            <div data-region-group="high-tech" class="hidden flex-wrap gap-2" role="group" aria-labelledby="region-label">
+              <button type="button" data-filter-region="all" aria-pressed="true" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">All regions</button>
+              <button type="button" data-filter-region="peninsula" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">Peninsula</button>
+              <button type="button" data-filter-region="south-bay" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">South Bay</button>
+              <button type="button" data-filter-region="east-bay" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">East Bay</button>
+            </div>
+
+            <div data-region-group="international" class="hidden flex-wrap gap-2" role="group" aria-labelledby="region-label">
+              <button type="button" data-filter-region="all" aria-pressed="true" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">All regions</button>
+              <button type="button" data-filter-region="europe" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">Europe</button>
+              <button type="button" data-filter-region="asia-pacific" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">Asia-Pacific</button>
+              <button type="button" data-filter-region="latin-america" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">Latin America</button>
+            </div>
+
+            <div data-region-group="life-sciences" class="hidden flex-wrap gap-2" role="group" aria-labelledby="region-label">
+              <button type="button" data-filter-region="all" aria-pressed="true" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">All regions</button>
+              <button type="button" data-filter-region="bay-area" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">Bay Area</button>
+              <button type="button" data-filter-region="east-coast" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">East Coast</button>
+              <button type="button" data-filter-region="europe" aria-pressed="false" class="px-4 py-2 text-[13px] rounded-full border border-blue-medium text-silicon-blue hover:border-signal-orange aria-pressed:bg-signal-orange aria-pressed:border-signal-orange aria-pressed:text-white">Europe</button>
+            </div>
+          </div>
+
+          <p id="results-count" aria-live="polite" class="col-span-12 text-[13px] text-blue-medium border-t border-blue-light pt-4">
+            Showing 16 companies
+          </p>
+        </div>
+      </section>
+
+      <!-- GRID DE MEMBROS: 1 col no mobile, 2 no sm, 3 no lg, 4 no xl. Os cards esticam até a altura da linha e o botão fica sempre no pé.
+           Filtro: o JS esconde/mostra cada <article> pelo data-category + data-region -->
+      <section class="container-line px-5 sm:px-8 pt-6 pb-14 sm:pb-16 lg:pb-20" aria-label="Member companies">
+        <div class="grid grid-cols-12 gap-6">
+          <!-- ===== HIGH TECH ===== -->
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="south-bay">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z" /><path d="M12 8l3.5 2v4L12 16l-3.5-2v-4z" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Lumora Systems</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Technology</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">South Bay</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Dana Whitfield</p>
+              <a href="#" aria-label="View Lumora Systems profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="south-bay">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><rect x="7" y="7" width="10" height="10" rx="1" /><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Quarry Semiconductor</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Manufacturing</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">South Bay</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Marcus Oyelaran</p>
+              <a href="#" aria-label="View Quarry Semiconductor profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="peninsula">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M4 16a8 8 0 0 1 16 0" /><path d="M2 16h20M12 4v2M5.6 6.6l1.4 1.4M18.4 6.6L17 8" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Brightline Data</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Technology</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Peninsula</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Priya Ramanathan</p>
+              <a href="#" aria-label="View Brightline Data profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="east-bay">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><rect x="4" y="4" width="10" height="10" /><rect x="10" y="10" width="10" height="10" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Harbor Robotics</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Manufacturing</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">East Bay</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Elena Varga</p>
+              <a href="#" aria-label="View Harbor Robotics profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="peninsula">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3.5" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Fieldnote Labs</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Technology</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Peninsula</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Theo Lindqvist</p>
+              <a href="#" aria-label="View Fieldnote Labs profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="east-bay">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M4 12h4l2-5 4 10 2-5h4" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Cobalt Circuit Works</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Manufacturing</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">East Bay</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Ana Beltrán</p>
+              <a href="#" aria-label="View Cobalt Circuit Works profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <!-- ===== INTERNATIONAL ===== -->
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="international" data-region="europe">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M3 9c3-3 6 3 9 0s6 3 9 0M3 15c3-3 6 3 9 0s6 3 9 0" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Nordwave Networks</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Technology</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Europe</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Signe Halvorsen</p>
+              <a href="#" aria-label="View Nordwave Networks profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="international" data-region="asia-pacific">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M12 4l8 15H4z" /><path d="M12 10l3 6H9z" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Kestrel Microdevices</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Manufacturing</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Asia-Pacific</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Kenji Moriyama</p>
+              <a href="#" aria-label="View Kestrel Microdevices profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="international" data-region="europe">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M12 3l9 9-9 9-9-9z" /><path d="M12 8l4 4-4 4-4-4z" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Solenne Software</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Technology</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Europe</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Julien Arceneaux</p>
+              <a href="#" aria-label="View Solenne Software profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="international" data-region="asia-pacific">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M3 17c3 0 4-10 9-10s6 10 9 10" /><path d="M3 20h18" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Tidepoint Electronics</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Manufacturing</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Asia-Pacific</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Mei Lin Tan</p>
+              <a href="#" aria-label="View Tidepoint Electronics profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="international" data-region="latin-america">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M3 19l6-10 4 6 3-4 5 8z" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Andes Cloudworks</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Technology</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Latin America</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Rafael Quintero</p>
+              <a href="#" aria-label="View Andes Cloudworks profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <!-- ===== LIFE SCIENCES ===== -->
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="life-sciences" data-region="bay-area">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z" /><path d="M12 11v9" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Verdant Bio</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Life Sciences</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Bay Area</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Hannah Okafor</p>
+              <a href="#" aria-label="View Verdant Bio profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="life-sciences" data-region="bay-area">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><path d="M8 3c0 6 8 6 8 9s-8 3-8 9M16 3c0 6-8 6-8 9s8 3 8 9M9 7.5h6M9 16.5h6" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Helix Ridge Therapeutics</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Life Sciences</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Bay Area</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Samuel Achterberg</p>
+              <a href="#" aria-label="View Helix Ridge Therapeutics profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="life-sciences" data-region="east-coast">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><circle cx="12" cy="12" r="8" /><path d="M12 8v8M8 12h8" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Clearwell Diagnostics</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Life Sciences</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">East Coast</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Rosa Delgado</p>
+              <a href="#" aria-label="View Clearwell Diagnostics profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="life-sciences" data-region="east-coast">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><circle cx="7" cy="7" r="2.5" /><circle cx="17" cy="7" r="2.5" /><circle cx="12" cy="17" r="2.5" /><path d="M9.5 7h5M8.2 9.2l2.6 5.6M15.8 9.2l-2.6 5.6" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Meridian Genomics</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Life Sciences</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">East Coast</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Owen Castellano</p>
+              <a href="#" aria-label="View Meridian Genomics profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+
+          <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="life-sciences" data-region="europe">
+            <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
+              <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-silicon-blue"><circle cx="12" cy="12" r="3" /><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5V9M12 15v5.5" /></svg>
+              </div>
+              <h3 class="text-xl md:text-2xl leading-[1.15] text-silicon-blue mb-3">Alpine Cell Sciences</h3>
+              <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+                <li class="text-[11px] tracking-[0.06em] uppercase bg-blue-light text-silicon-blue px-2 py-1">Life Sciences</li>
+                <li class="text-[11px] tracking-[0.06em] uppercase border border-blue-light text-blue-medium px-2 py-1">Europe</li>
+              </ul>
+              <p class="text-[14px] text-ink mb-6"><span class="block text-[11px] tracking-[0.08em] uppercase text-blue-medium">CEO</span>Lena Brunner</p>
+              <a href="#" aria-label="View Alpine Cell Sciences profile" class="mt-auto block text-center border border-silicon-blue text-silicon-blue px-4 py-[10px] text-[14px] font-semibold rounded-[2px] hover:bg-silicon-blue hover:text-off-white">View Profile</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- DEPOIMENTOS: fecho da página. Depois de ver quem está no mapa, o visitante ouve o que os membros dizem sobre estar lá -->
+      <section class="testimonials w-full bg-silicon-blue">
+        <div class="container-line px-5 py-12 sm:px-8 sm:py-14 lg:py-20">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-blue-light mb-2">
+            In their words
+          </div>
+          <h2 class="leading-[1.1] text-[22px] md:text-[32px] text-off-white mb-8 sm:mb-10">
+            What members say about<br class="hidden sm:block" />
+            being on the map.
+          </h2>
+
+          <div class="grid grid-cols-12 gap-6">
+            <figure class="col-span-12 md:col-span-4 flex flex-col border border-off-white/15 p-6">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-4 stroke-signal-orange">
+                <path d="M4 8.5h5.5V14H4zM14.5 8.5H20V14h-5.5z" />
+                <path d="M9.5 14c0 2-1 3.5-3 4M20 14c0 2-1 3.5-3 4" />
+              </svg>
+              <blockquote class="italic text-base md:text-xl leading-[1.5] text-off-white mb-6">
+                "Our booth traffic doubled the first year we appeared on the map. People walk up already knowing where we fit in the ecosystem."
+              </blockquote>
+              <figcaption class="mt-auto text-[13px] text-blue-light">
+                <span class="block font-semibold text-off-white">Dana Whitfield</span>
+                CEO, Lumora Systems
+              </figcaption>
+            </figure>
+
+            <figure class="col-span-12 md:col-span-4 flex flex-col border border-off-white/15 p-6">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-4 stroke-signal-orange">
+                <path d="M4 8.5h5.5V14H4zM14.5 8.5H20V14h-5.5z" />
+                <path d="M9.5 14c0 2-1 3.5-3 4M20 14c0 2-1 3.5-3 4" />
+              </svg>
+              <blockquote class="italic text-base md:text-xl leading-[1.5] text-off-white mb-6">
+                "For an international company, the map is our address in the Valley. It starts conversations before we even land in San Francisco."
+              </blockquote>
+              <figcaption class="mt-auto text-[13px] text-blue-light">
+                <span class="block font-semibold text-off-white">Signe Halvorsen</span>
+                CEO, Nordwave Networks
+              </figcaption>
+            </figure>
+
+            <figure class="col-span-12 md:col-span-4 flex flex-col border border-off-white/15 p-6">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-4 stroke-signal-orange">
+                <path d="M4 8.5h5.5V14H4zM14.5 8.5H20V14h-5.5z" />
+                <path d="M9.5 14c0 2-1 3.5-3 4M20 14c0 2-1 3.5-3 4" />
+              </svg>
+              <blockquote class="italic text-base md:text-xl leading-[1.5] text-off-white mb-6">
+                "Recruiting is our hardest problem. Seeing our name next to companies candidates admire makes the first call much easier."
+              </blockquote>
+              <figcaption class="mt-auto text-[13px] text-blue-light">
+                <span class="block font-semibold text-off-white">Hannah Okafor</span>
+                CEO, Verdant Bio
+              </figcaption>
+            </figure>
+          </div>
+
+          <a
+            href="#"
+            class="mt-10 text-[14px] font-semibold text-off-white border-b border-signal-orange pb-[2px] inline-block w-fit"
+          >
+            Put your company on the map →
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="w-full">
+      <div class="container-line px-5 py-8 sm:px-8 sm:py-10 lg:py-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="mb-7 sm:mb-0">
+            <span
+              class="font-display font-semibold text-[18px] mb-2 block text-silicon-blue"
+              >Silicon Maps</span
+            >
+            <p class="text-[13px] text-blue-medium leading-[1.5]">
+              We put your business on the map, helping companies get discovered
+              across the world's leading tech and life sciences hubs.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-xl md:text-2xl mb-3 text-silicon-blue">Quick links</h4>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">About us</a>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Our history</a>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Maps</a>
+            <a href="members.html" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Members</a>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Press</a>
+          </div>
+          <div>
+            <h4 class="text-xl md:text-2xl mb-3 text-silicon-blue">Resources</h4>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Podcast</a>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">FAQ</a>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Listing requirements</a>
+            <a href="#" class="block text-[13px] text-blue-medium mb-[10px] hover:text-silicon-blue">Contact us</a>
+          </div>
+          <div>
+            <h4 class="text-xl md:text-2xl mb-3 text-silicon-blue">Get listed</h4>
+            <p class="text-[13px] text-blue-medium leading-[1.5] mb-[10px]">
+              Join the companies already visible to buyers and investors
+              browsing our maps.
+            </p>
+            <a class="text-[13px] font-semibold text-silicon-blue mt-1 block"
+              >▶ Listen to the podcast</a
+            >
+          </div>
+        </div>
+
+        <div
+          class="flex justify-between text-[11px] text-blue-medium border-t border-blue-light pt-[18px] mt-7"
+        >
+          <span>© 2026 Silicon Maps. All rights reserved.</span>
+          <span>Terms of use</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const drawer = document.getElementById("drawer");
+
+      function toggleDrawer() {
+        drawer.classList.toggle("hidden");
+        drawer.classList.toggle("flex");
+      }
+
+      // Filtros: categoria (nível 1) + região (nível 2). Um card aparece se bater com os dois
+      const cards = document.querySelectorAll(".member-card");
+      const categoryButtons = document.querySelectorAll("[data-filter-category]");
+      const regionFilter = document.getElementById("region-filter");
+      const regionGroups = document.querySelectorAll("[data-region-group]");
+      const resultsCount = document.getElementById("results-count");
+      let activeCategory = "all";
+      let activeRegion = "all";
+
+      function setPressed(buttons, activeButton) {
+        buttons.forEach((b) => b.setAttribute("aria-pressed", b === activeButton));
+      }
+
+      function applyFilters() {
+        let visible = 0;
+        cards.forEach((card) => {
+          const show =
+            (activeCategory === "all" || card.dataset.category === activeCategory) &&
+            (activeRegion === "all" || card.dataset.region === activeRegion);
+          card.classList.toggle("hidden", !show);
+          if (show) visible++;
+        });
+        resultsCount.textContent = `Showing ${visible} ${visible === 1 ? "company" : "companies"}`;
+      }
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeCategory = button.dataset.filterCategory;
+          activeRegion = "all";
+          setPressed(categoryButtons, button);
+
+          // Mostra só o grupo de regiões da categoria escolhida, sempre voltando para "All regions"
+          regionFilter.classList.toggle("hidden", activeCategory === "all");
+          regionGroups.forEach((group) => {
+            const isActive = group.dataset.regionGroup === activeCategory;
+            group.classList.toggle("hidden", !isActive);
+            group.classList.toggle("flex", isActive);
+            const regionButtons = group.querySelectorAll("[data-filter-region]");
+            setPressed(regionButtons, regionButtons[0]);
+          });
+
+          applyFilters();
+        });
+      });
+
+      regionGroups.forEach((group) => {
+        const regionButtons = group.querySelectorAll("[data-filter-region]");
+        regionButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            activeRegion = button.dataset.filterRegion;
+            setPressed(regionButtons, button);
+            applyFilters();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
