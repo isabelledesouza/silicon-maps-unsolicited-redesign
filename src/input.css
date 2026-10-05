@@ -51,8 +51,10 @@
   --color-off-white: #F8F8FA;
   --color-ink: #18242D;
   --color-signal-orange: #E06B3C;
+  --color-signal-orange-dark: color-mix(in srgb, var(--color-signal-orange) 78%, black);
   --color-grid-line: #6B9BC3;
   --color-orange-medium: #E39475;
+  --color-grid-node: rgb(255 255 255 / 0.55);
 }
 
 /* Container do layout: largura total, centralizado, máximo de 1280px a partir do lg */
@@ -76,12 +78,30 @@
     linear-gradient(0deg, var(--color-grid-line) 1px, transparent 1px);
   background-size: 100px 100px;
   mask-image: linear-gradient(to bottom, #000 0%, transparent 80%);
+
+  /* Losango em cada cruzamento das linhas: o SVG centraliza o losango no tile de 100px e o -50px leva ele para o canto */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-grid-node);
+    -webkit-mask-image: var(--diamond);
+    mask-image: var(--diamond);
+    -webkit-mask-size: 100px 100px;
+    mask-size: 100px 100px;
+    -webkit-mask-position: -50px -50px;
+    mask-position: -50px -50px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+  }
 }
 
 @layer base {
   /* Altura do header fixo (fallback); o script no index.html atualiza com o valor real */
   :root {
     --header-h: 73px;
+    /* Losango dos cruzamentos da hero-grid (usado como mask-image) */
+    --diamond: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg transform='translate(46 46) scale(.25)'%3E%3Cpath d='M29.39 14.527L17.474 2.609C17.067 2.203 16.533 2 16 2s-1.067.203-1.473.61L2.609 14.526C2.203 14.933 2 15.467 2 16s.203 1.067.61 1.473l11.917 11.918c.406.406.94.609 1.473.609s1.067-.203 1.473-.61l11.918-11.917c.406-.406.609-.94.609-1.473s-.203-1.067-.61-1.473'/%3E%3C/g%3E%3C/svg%3E");
   }
 }
 
