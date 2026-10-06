@@ -47,11 +47,10 @@
 
         <button
           class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
+          aria-label="Open menu"
           onclick="toggleDrawer()"
         >
-          <span class="w-5 h-[1.5px] bg-off-white block"></span>
-          <span class="w-5 h-[1.5px] bg-off-white block"></span>
-          <span class="w-5 h-[1.5px] bg-off-white block"></span>
+          <svg class="h-6 w-6 text-off-white" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 17H8M12 17H20M4 12H20M4 7H12M16 7H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
@@ -124,6 +123,157 @@
             </figcaption>
           </figure>
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION: History — timeline centralizada. Rota no centro (md+) ou à esquerda (mobile); itens alternam
+         texto/imagem. Ganchos para o JS:
+         - #route: SVG com #route-bg (cinza) e #route-fill (laranja); o "d" é gerado pelo JS a partir dos marcadores e termina no "You"
+         - .timeline-marker: quadrado; o JS troca bg-ink/25 por bg-signal-orange e gira os do meio para losango (constantes no topo de js/timeline.js)
+         - .timeline-nav a[data-nav] (= id do item): no ativo, adicionar a classe is-active E o atributo data-active (é ele que muda o estilo) -->
+    <section id="history" class="history relative w-full bg-off-white">
+      <div class="container-line px-5 py-16 sm:px-8 lg:py-24 lg:pr-36">
+        <header class="timeline-header mx-auto mb-16 max-w-2xl text-center">
+          <div class="text-[11px] tracking-[0.08em] uppercase mb-3 text-blue-medium flex items-center justify-center gap-2">
+            <span class="diamond size-2.5 bg-signal-orange" aria-hidden="true"></span>Our history
+          </div>
+          <h2 class="leading-[1.15] text-[22px] md:text-[32px] text-ink">
+            From 1989 to today.
+          </h2>
+          <p class="text-base md:text-xl text-ink leading-[1.6] mt-4">
+            From the first Silicon Valley map to a growing network of
+            technology and life sciences companies.
+          </p>
+        </header>
+
+        <div class="timeline relative">
+          <!-- Rota em degraus: fundo (cinza) e progresso (laranja). O "d" e as cores vêm do js/timeline.js -->
+          <svg id="route" class="pointer-events-none absolute inset-0 size-full overflow-visible" aria-hidden="true">
+            <path id="route-bg" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <path id="route-fill" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+          </svg>
+
+          <ol>
+            <!-- 1989: texto à esquerda, imagem à direita -->
+            <li id="history-1989" data-year="1989" class="timeline-item relative pt-12 pb-20 pl-12 md:pl-0">
+              <span class="timeline-marker absolute left-4 -top-0.5 z-10 size-7 -translate-x-1/2 bg-ink/25 md:left-1/2" aria-hidden="true"></span>
+              <div class="absolute left-4 top-0 ml-3 flex h-6 items-center md:left-auto md:right-1/2 md:ml-0 md:mr-3 md:flex-row-reverse" aria-hidden="true">
+                <span class="h-px w-6 bg-ink/30"></span>
+                <span class="timeline-tag bg-silicon-blue px-2 py-1 font-mono text-xs uppercase tracking-widest text-off-white">1989</span>
+              </div>
+              <div class="timeline-content grid gap-6 md:grid-cols-2 md:gap-x-24">
+                <div class="timeline-copy md:order-1">
+                  <h3 class="text-2xl text-ink">The first map</h3>
+                  <p class="timeline-location mt-2 font-mono text-xs uppercase tracking-widest text-blue-medium">Silicon Valley</p>
+                  <p class="mt-4 text-base leading-relaxed text-ink">
+                    It started with a map, documenting the companies,
+                    people and places shaping Silicon Valley.
+                  </p>
+                </div>
+                <div class="timeline-image grid aspect-video place-items-center bg-blue-light font-mono text-xs uppercase tracking-widest text-blue-medium md:order-2">
+                  Image placeholder
+                </div>
+              </div>
+            </li>
+
+            <!-- 2000s: imagem à esquerda, texto à direita -->
+            <li id="history-2000s" data-year="2000s" class="timeline-item relative pt-12 pb-20 pl-12 md:pl-0">
+              <span class="timeline-marker absolute left-4 -top-0.5 z-10 size-7 -translate-x-1/2 bg-ink/25 md:left-1/2" aria-hidden="true"></span>
+              <div class="absolute left-4 top-0 ml-3 flex h-6 items-center md:left-1/2" aria-hidden="true">
+                <span class="h-px w-6 bg-ink/30"></span>
+                <span class="timeline-tag bg-silicon-blue px-2 py-1 font-mono text-xs uppercase tracking-widest text-off-white">2000s</span>
+              </div>
+              <div class="timeline-content grid gap-6 md:grid-cols-2 md:gap-x-24">
+                <div class="timeline-copy md:order-2">
+                  <h3 class="text-2xl text-ink">Beyond Silicon Valley</h3>
+                  <p class="timeline-location mt-2 font-mono text-xs uppercase tracking-widest text-blue-medium">Technology · Life sciences · Regional industries</p>
+                  <p class="mt-4 text-base leading-relaxed text-ink">
+                    The map grew beyond one region, connecting companies
+                    and communities across technology and life sciences.
+                  </p>
+                </div>
+                <div class="timeline-image grid aspect-video place-items-center bg-blue-light font-mono text-xs uppercase tracking-widest text-blue-medium md:order-1">
+                  Image placeholder
+                </div>
+              </div>
+            </li>
+
+            <!-- Today: texto à esquerda, imagem à direita -->
+            <li id="history-today" data-year="today" class="timeline-item relative pt-12 pb-20 pl-12 md:pl-0">
+              <span class="timeline-marker absolute left-4 -top-0.5 z-10 size-7 -translate-x-1/2 bg-ink/25 md:left-1/2" aria-hidden="true"></span>
+              <div class="absolute left-4 top-0 ml-3 flex h-6 items-center md:left-auto md:right-1/2 md:ml-0 md:mr-3 md:flex-row-reverse" aria-hidden="true">
+                <span class="h-px w-6 bg-ink/30"></span>
+                <span class="timeline-tag bg-silicon-blue px-2 py-1 font-mono text-xs uppercase tracking-widest text-off-white">Today</span>
+              </div>
+              <div class="timeline-content grid gap-6 md:grid-cols-2 md:gap-x-24">
+                <div class="timeline-copy md:order-1">
+                  <h3 class="text-2xl text-ink">A growing network</h3>
+                  <p class="timeline-location mt-2 font-mono text-xs uppercase tracking-widest text-blue-medium">Companies · Communities · Connections</p>
+                  <p class="mt-4 text-base leading-relaxed text-ink">
+                    Today, the maps bring together a growing network of
+                    companies and organizations shaping their industries.
+                  </p>
+                </div>
+                <div class="timeline-image grid aspect-video place-items-center bg-blue-light font-mono text-xs uppercase tracking-widest text-blue-medium md:order-2">
+                  Image placeholder
+                </div>
+              </div>
+            </li>
+
+            <!-- You: imagem à esquerda, texto à direita. A rota termina no marcador deste item -->
+            <li id="history-you" data-year="you" class="timeline-item timeline-item-final relative pt-12 pl-12 md:pl-0">
+              <span class="timeline-marker absolute left-4 -top-0.5 z-10 size-7 -translate-x-1/2 bg-ink/25 md:left-1/2" aria-hidden="true"></span>
+              <div class="absolute left-4 top-0 ml-3 flex h-6 items-center md:left-1/2" aria-hidden="true">
+                <span class="h-px w-6 bg-ink/30"></span>
+                <span class="timeline-tag bg-silicon-blue px-2 py-1 font-mono text-xs uppercase tracking-widest text-off-white">You</span>
+              </div>
+              <div class="timeline-content grid gap-6 md:grid-cols-2 md:gap-x-24">
+                <div class="timeline-copy md:order-2">
+                  <h3 class="text-2xl text-ink">Your company</h3>
+                  <p class="timeline-location mt-2 font-mono text-xs uppercase tracking-widest text-blue-medium">Your place on the map</p>
+                  <p class="mt-4 text-base leading-relaxed text-ink">
+                    The story continues with the companies that become
+                    part of the map.
+                  </p>
+                  <a href="#process" class="timeline-link mt-6 group inline-flex items-center gap-2 border-b-2 border-signal-orange pb-2 font-semibold transition-all duration-300 hover:border-b-4 hover:pb-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange motion-reduce:transition-none w-fit">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+                <div class="timeline-image grid aspect-video place-items-center bg-blue-light font-mono text-xs uppercase tracking-widest text-blue-medium md:order-1">
+                  Your company / image placeholder
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Navegador lateral de anos (scrollspy), só de lg para cima. A coluna (absolute) tem a altura da section e o nav é sticky
+           dentro dela: fica no meio da tela enquanto a timeline passa e some junto com a section. A linha passa pelo centro dos losangos.
+           Ativo = atributo data-active no <a> (o JS também põe a classe is-active) -->
+      <div class="absolute inset-y-0 right-8 hidden py-24 lg:block">
+      <nav class="timeline-nav sticky top-1/2 z-40 -translate-y-1/2" aria-label="History timeline">
+        <ol class="relative flex flex-col gap-6 before:absolute before:left-1.5 before:top-1.5 before:bottom-1.5 before:w-px before:-translate-x-1/2 before:bg-ink/15">
+          <li>
+            <a href="#history-1989" data-nav="history-1989" class="group relative flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink/70 data-active:text-ink">
+              <span class="flex size-3 shrink-0 items-center justify-center" aria-hidden="true"><span class="size-1.5 rotate-45 bg-ink/30 transition-all duration-300 group-data-active:size-3 group-data-active:bg-signal-orange motion-reduce:transition-none"></span></span>1989
+            </a>
+          </li>
+          <li>
+            <a href="#history-2000s" data-nav="history-2000s" class="group relative flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink/70 data-active:text-ink">
+              <span class="flex size-3 shrink-0 items-center justify-center" aria-hidden="true"><span class="size-1.5 rotate-45 bg-ink/30 transition-all duration-300 group-data-active:size-3 group-data-active:bg-signal-orange motion-reduce:transition-none"></span></span>2000s
+            </a>
+          </li>
+          <li>
+            <a href="#history-today" data-nav="history-today" class="group relative flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink/70 data-active:text-ink">
+              <span class="flex size-3 shrink-0 items-center justify-center" aria-hidden="true"><span class="size-1.5 rotate-45 bg-ink/30 transition-all duration-300 group-data-active:size-3 group-data-active:bg-signal-orange motion-reduce:transition-none"></span></span>Today
+            </a>
+          </li>
+          <li>
+            <a href="#history-you" data-nav="history-you" class="group relative flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink/70 data-active:text-ink">
+              <span class="flex size-3 shrink-0 items-center justify-center" aria-hidden="true"><span class="size-1.5 rotate-45 bg-ink/30 transition-all duration-300 group-data-active:size-3 group-data-active:bg-signal-orange motion-reduce:transition-none"></span></span>You
+            </a>
+          </li>
+        </ol>
+      </nav>
       </div>
     </section>
 
@@ -437,8 +587,10 @@
 
     <!-- SECTION: Process — os 4 passos como sequência numa <ol>.
          Mobile: linha vertical (border-l de cada <li>, transparente no último para a linha acabar no losango 04).
-         md+: 4 colunas sem gap; a linha horizontal é o before: de cada <li> (zerado no último) e o losango é o after:,
-         com fundo off-white para cobrir a linha. O losango 04 é preenchido: fim do processo.
+         md+: 4 colunas sem gap; a linha horizontal é o before: de cada <li> (zerado no último).
+         Ganchos para o js/process.js:
+         - #process-fill (md+): linha laranja do centro do losango 01 ao 04 (origin-left, scale-x-0)
+         - [data-process-step] .process-diamond / .process-number: começam vazios/escuros e o JS troca para laranja
          Ordem com flex: no mobile título → passos → botão; no md+ título e botão na mesma linha, passos embaixo -->
     <section id="process" class="process bg-off-white w-full">
       <div class="container-line px-5 py-10 sm:px-8 sm:py-14 lg:py-20">
@@ -454,44 +606,51 @@
 
           <a href="#" class="order-3 md:order-2 group inline-flex items-center gap-2 border-b-2 border-signal-orange pb-2 font-semibold transition-all duration-300 hover:border-b-4 hover:pb-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange motion-reduce:transition-none w-fit">View packages <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
-          <ol class="order-2 md:order-3 md:basis-full grid grid-cols-1 md:grid-cols-4 md:gap-0">
-            <li class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0 after:absolute after:-left-1.5 after:top-2.5 after:h-3 after:w-3 after:rotate-45 after:border-2 after:border-signal-orange after:bg-off-white last:after:bg-signal-orange md:after:left-0 md:after:top-0">
+          <div class="relative order-2 md:order-3 md:basis-full">
+          <span id="process-fill" class="absolute left-1.5 top-1.5 z-10 hidden h-px w-3/4 origin-left scale-x-0 bg-signal-orange md:block" aria-hidden="true"></span>
+          <ol class="grid grid-cols-1 md:grid-cols-4 md:gap-0">
+            <li data-process-step="1" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
+              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
               <div class="flex items-center gap-3 mb-4">
-                <span class="font-mono text-sm font-semibold text-silicon-blue">01</span>
+                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">01</span>
                 <img src="./assets/icons/selection.svg" alt="Selection Icon"/>
               </div>
               <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Choose your package</h3>
               <p class="font-sans text-base leading-relaxed text-ink">Choose the visibility options that fit your company.</p>
             </li>
 
-            <li class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0 after:absolute after:-left-1.5 after:top-2.5 after:h-3 after:w-3 after:rotate-45 after:border-2 after:border-signal-orange after:bg-off-white last:after:bg-signal-orange md:after:left-0 md:after:top-0">
+            <li data-process-step="2" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
+              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
               <div class="flex items-center gap-3 mb-4">
-                <span class="font-mono text-sm font-semibold text-silicon-blue">02</span>
+                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">02</span>
                 <img src="assets/icons/upload-simple.svg" alt="Upload icon"/>
               </div>
               <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Send your artwork</h3>
               <p class="font-sans text-base leading-relaxed text-ink">Submit your vector logo and placement specs.</p>
             </li>
 
-            <li class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0 after:absolute after:-left-1.5 after:top-2.5 after:h-3 after:w-3 after:rotate-45 after:border-2 after:border-signal-orange after:bg-off-white last:after:bg-signal-orange md:after:left-0 md:after:top-0">
+            <li data-process-step="3" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
+              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
               <div class="flex items-center gap-3 mb-4">
-                <span class="font-mono text-sm font-semibold text-silicon-blue">03</span>
+                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">03</span>
                 <img src="assets/icons/check-square-offset.svg" alt=""/>
               </div>
               <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Approve your proof</h3>
               <p class="font-sans text-base leading-relaxed text-ink">Our art department prepares your placement for approval.</p>
             </li>
 
-            <!-- 04: último passo — losango preenchido e número em laranja (o -dark, para o texto pequeno ter contraste 4.8:1) -->
-            <li class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0 after:absolute after:-left-1.5 after:top-2.5 after:h-3 after:w-3 after:rotate-45 after:border-2 after:border-signal-orange after:bg-off-white last:after:bg-signal-orange md:after:left-0 md:after:top-0">
+            <!-- 04: último passo. Aceso, o número usa o laranja -dark para o texto pequeno ter contraste 4.8:1 -->
+            <li data-process-step="4" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
+              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
               <div class="flex items-center gap-3 mb-4">
-                <span class="font-mono text-sm font-semibold text-signal-orange-dark">04</span>
+                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">04</span>
                 <img src="assets/icons/circutry.svg" alt="Circutry Icon"/>
               </div>
-              <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Get on the map</h3>
+              <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Welcome to the map</h3>
               <p class="font-sans text-base leading-relaxed text-ink">Your company appears on the printed map.</p>
             </li>
           </ol>
+          </div>
         </div>
       </div>
     </section>
@@ -633,5 +792,9 @@
       window.addEventListener("resize", setHeaderHeight);
       setHeaderHeight();
     </script>
+    <script src="js/vendor/gsap.min.js"></script>
+    <script src="js/vendor/ScrollTrigger.min.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/process.js"></script>
   </body>
 </html>
