@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+  <!-- <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCJV5MDXYY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -8,14 +8,26 @@
   gtag('js', new Date());
 
   gtag('config', 'G-GCJV5MDXYY');
-</script>
+</script> -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="dist/output.css" />
     <title>Silicon Maps</title>
+    <script src="js/triggers_ga4.js" defer></script>
     <script>document.documentElement.classList.add("js");</script>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KVP7NKRK');</script>
+<!-- End Google Tag Manager -->
   </head>
   <body class="font-sans text-ink bg-off-white">
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVP7NKRK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <!-- HEADER: fixo e transparente sobre a hero (mostra a ponte); fica azul sólido assim que rolar (script no fim) -->
     <header
       id="site-header"
@@ -52,7 +64,7 @@
           >
         </nav>
 
-        <a href="#" class="hidden lg:inline-flex group relative isolate min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-transparent px-5 py-3 font-semibold leading-none text-off-white transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange before:transition-transform before:duration-500 hover:text-ink hover:before:translate-x-0 focus-visible:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a  id="get-on-map" href="#" class="hidden lg:inline-flex group relative isolate min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-transparent px-5 py-3 font-semibold leading-none text-off-white transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange before:transition-transform before:duration-500 hover:text-ink hover:before:translate-x-0 focus-visible:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <button
           class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
