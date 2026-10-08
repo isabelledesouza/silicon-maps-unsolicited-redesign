@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/* Seção "How you get on the map" (mapa por passos): estilos em arquivo próprio */
+@import "./process-map.css";
+/* Hero: parede com granulação e pôster iluminado */
+@import "./hero.css";
 
 /* Fontes locais (assets/fonts). Caminhos relativos ao dist/output.css */
 @font-face {
@@ -41,9 +45,52 @@
   font-display: swap;
 }
 
+/* IBM Plex (seção "How you get on the map"): Sans no corpo, Mono nos rótulos do mapa, eyebrows e legenda */
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../assets/fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../assets/fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../assets/fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../assets/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-display: "Fraunces", serif;
   --font-sans: "Satoshi", sans-serif;
+  --font-plex: "IBM Plex Sans", system-ui, sans-serif;
+  --font-plex-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --color-silicon-blue: #123B5D;
   --color-blue-medium: #2C6E9E;
@@ -54,6 +101,9 @@
   --color-signal-orange-dark: color-mix(in srgb, var(--color-signal-orange) 78%, black);
   --color-grid-line: #6B9BC3;
   --color-orange-medium: #E39475;  --color-grid-node: rgb(255 255 255 / 0.55);
+  --color-blue-deep: #1F557D;
+  --color-cream: #F7F5F0;
+  --color-map-land: #F1EEE6;
 }
 
 /* Container do layout: largura total, centralizado, máximo de 1280px a partir do lg */
@@ -150,10 +200,4 @@
     linear-gradient(to bottom, transparent 85%, color-mix(in srgb, var(--color-ink) 35%, transparent));
 }
 
-/* Luz de spot (index.3): mesma luz da exhibition-wall, mas como camada por cima de uma imagem de fundo */
-@utility spotlight {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(ellipse 45% 70% at 75% 0%, color-mix(in srgb, var(--color-blue-medium) 70%, transparent), transparent 70%);
-}
+
