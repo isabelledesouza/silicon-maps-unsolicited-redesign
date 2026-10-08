@@ -1,10 +1,19 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCJV5MDXYY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GCJV5MDXYY');
+</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="dist/output.css" />
     <title>Silicon Maps</title>
+    <script>document.documentElement.classList.add("js");</script>
   </head>
   <body class="font-sans text-ink bg-off-white">
     <!-- HEADER: fixo e transparente sobre a hero (mostra a ponte); fica azul sólido assim que rolar (script no fim) -->
@@ -25,7 +34,7 @@
           </span>
         </div>
 
-        <nav class="hidden lg:flex items-center gap-8 text-lg ml-auto mr-8">
+        <nav class="hidden lg:flex items-center gap-8 text-lg ml-auto mr-8" aria-label="Main">
           <a href="#" class="text-white no-underline hover:text-blue-light"
             >About us</a
           >
@@ -43,7 +52,7 @@
           >
         </nav>
 
-        <a href="#" class="hidden lg:inline-flex group relative isolate min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-signal-orange px-5 py-3 font-semibold leading-none text-ink transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange-dark before:transition-transform before:duration-500 hover:text-off-white hover:before:translate-x-0 focus-visible:text-off-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none">Become a sponsor <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="hidden lg:inline-flex group relative isolate min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-transparent px-5 py-3 font-semibold leading-none text-off-white transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange before:transition-transform before:duration-500 hover:text-ink hover:before:translate-x-0 focus-visible:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
         <button
           class="lg:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none"
@@ -56,6 +65,7 @@
 
       <nav
         id="drawer"
+        aria-label="Main mobile"
         class="hidden lg:hidden flex-col px-5 py-5 sm:px-8 bg-silicon-blue border-t border-white/10 gap-4 text-[15px] w-full"
       >
         <a href="#" class="text-white no-underline">About us</a>
@@ -63,23 +73,24 @@
         <a href="members.html" class="text-white no-underline">Members</a>
         <a href="#" class="text-white no-underline">Packages</a>
         <a href="#" class="text-white no-underline">Contact us</a>
-        <a href="#" class="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-signal-orange px-5 py-3 font-semibold leading-none text-ink transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange-dark before:transition-transform before:duration-500 hover:text-off-white hover:before:translate-x-0 focus-visible:text-off-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none mt-2 w-fit">Become a sponsor <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-transparent px-5 py-3 font-semibold leading-none text-off-white transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange before:transition-transform before:duration-500 hover:text-ink hover:before:translate-x-0 focus-visible:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none mt-2 w-fit">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </nav>
     </header>
 
-    <!-- HERO: fundo azul full-bleed (fora do container) + pôster/texto dentro do container-line -->
-    <section class="hero relative">
-      <!-- Parede de exposição: foto da parede azul do estande + luz de spot vindo de cima sobre o pôster (utility spotlight no input.css) -->
-      <div id="hero-bg" class="bg-silicon-blue w-full relative overflow-hidden">
-        <img
-          src="./assets/blue-exhibition-booth-wall.webp"
-          alt=""
-          aria-hidden="true"
-          class="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none"
-        />
-        <div class="spotlight" aria-hidden="true"></div>
+    <main id="main">
+    <!-- HERO: parede azul-marinho com granulação e o pôster iluminado como obra de galeria (estilos em src/hero.css).
+         Camadas atrás do conteúdo: parede com ruído (bg-noise.svg), .hero-wall-shade (sombra leve) e .spotlight (cone opcional, luz e vinheta, acendem uma vez no load).
+         O script no fim da página centraliza a luz no pôster (--spot-x / --spot-y) -->
+    <section class="hero relative border-b-16 border-ink">
+      <div id="hero-bg" class="bg-silicon-blue w-full relative overflow-hidden min-h-[calc(100svh-16px)] flex">
+        <div class="hero-wall-shade" aria-hidden="true"></div>
+        <div class="spotlight" aria-hidden="true">
+          <span class="spotlight__cone"></span>
+          <span class="spotlight__light"></span>
+          <span class="spotlight__vignette"></span>
+        </div>
         <div
-          class="relative z-10 container-line grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-16 px-5 pt-[calc(var(--header-h)+2.5rem)] pb-48 sm:px-8 sm:pt-[calc(var(--header-h)+3.5rem)] lg:pt-[calc(var(--header-h)+4rem)]"
+          class="relative z-10 container-line w-full grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-16 px-5 pt-[calc(var(--header-h)+2.5rem)] pb-16 sm:px-8 sm:pt-[calc(var(--header-h)+3.5rem)] md:pt-[calc(var(--header-h)+1.5rem)] md:pb-10"
         >
           <!-- Texto: lado esquerdo -->
           <div class="max-w-[560px]">
@@ -104,23 +115,24 @@
             </div>
           </div>
 
-          <!-- Pôster: lado direito, pendurado na parede com sombra + etiqueta de museu -->
+          <!-- Pôster: lado direito, pendurado na parede (sombra em camadas + luz vindo de cima) com placa de museu embaixo -->
           <figure class="flex flex-col items-center">
-            <img
-              src="./assets/iframe-sillicon-valley-1989.png"
-              alt="Welcome to Silicon Valley, 1989 calendar poster"
-              class="w-[240px] sm:w-[300px] lg:w-[340px] drop-shadow-[0_24px_32px_rgba(0,0,0,0.45)]"
-            />
-            <figcaption
-              class="mt-6 bg-off-white text-ink px-4 py-3 text-left shadow-md"
-            >
-              <span class="block text-[13px] font-semibold text-silicon-blue">
-                Welcome to Silicon Valley
-              </span>
-              <span class="block text-[12px] text-blue-medium">
-                Calendar poster, 1989
-              </span>
-            </figcaption>
+            <div class="hero-poster">
+              <div class="hero-poster__art">
+                <img
+                  src="./assets/iframe-sillicon-valley-1989.png"
+                  alt="Welcome to Silicon Valley, 1989 calendar poster"
+                  width="1024"
+                  height="1536"
+                  class="hero-poster__img"
+                />
+                <span class="hero-poster__light" aria-hidden="true"></span>
+              </div>
+              <figcaption class="hero-placard">
+                <span class="hero-placard__title">Welcome to Silicon Valley</span>
+                <span class="hero-placard__meta">Calendar poster, 1989</span>
+              </figcaption>
+            </div>
           </figure>
         </div>
       </div>
@@ -235,7 +247,6 @@
                     The story continues with the companies that become
                     part of the map.
                   </p>
-                  <a href="#process" class="timeline-link mt-6 group inline-flex items-center gap-2 border-b-2 border-signal-orange pb-2 font-semibold transition-all duration-300 hover:border-b-4 hover:pb-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange motion-reduce:transition-none w-fit">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </div>
                 <div class="timeline-image grid aspect-video place-items-center bg-blue-light font-mono text-xs uppercase tracking-widest text-blue-medium md:order-1">
                   Your company / image placeholder
@@ -585,72 +596,164 @@
       </div>
     </section>
 
-    <!-- SECTION: Process — os 4 passos como sequência numa <ol>.
-         Mobile: linha vertical (border-l de cada <li>, transparente no último para a linha acabar no losango 04).
-         md+: 4 colunas sem gap; a linha horizontal é o before: de cada <li> (zerado no último).
-         Ganchos para o js/process.js:
-         - #process-fill (md+): linha laranja do centro do losango 01 ao 04 (origin-left, scale-x-0)
-         - [data-process-step] .process-diamond / .process-number: começam vazios/escuros e o JS troca para laranja
-         Ordem com flex: no mobile título → passos → botão; no md+ título e botão na mesma linha, passos embaixo -->
-    <section id="process" class="process bg-off-white w-full">
-      <div class="container-line px-5 py-10 sm:px-8 sm:py-14 lg:py-20">
-        <div class="flex flex-col gap-10 md:flex-row md:flex-wrap md:items-end md:justify-between md:gap-y-14">
-          <div class="order-1">
-            <div class="text-[11px] tracking-[0.08em] uppercase mb-3 text-blue-medium flex items-center gap-2">
-              <span class="diamond size-2.5 bg-signal-orange" aria-hidden="true"></span>The process
+    <!-- SECTION: How you get on the map — seção comum (sem sticky, sem scroll scrub) que cabe numa tela.
+         Esquerda: 4 cards planos, todos visíveis. Direita: mapa (assets/map.webp) em sangria com um overlay SVG
+         animado em loop por uma timeline do GSAP (js/process.js), sincronizado com o card ativo.
+         Estilos em src/process-map.css. Camadas com id dentro de #placement (coordenadas relativas ao ponto da vaga):
+         l-zoneFill (scrim) · l-zone · l-zoneLabel · l-grid · l-slot · l-logo · l-proof · l-marker · l-label. Legenda em HTML (#l-legend).
+         Sem JS ou com movimento reduzido: estado final (vaga, marcador e rótulo) e os 4 cards em opacidade total -->
+    <section id="process" class="pm w-full" aria-labelledby="process-title">
+      <div class="pm__inner">
+        <p class="pm__eyebrow">
+          <span class="diamond size-2.5 bg-signal-orange" aria-hidden="true"></span>How you get on the map
+        </p>
+        <h2 id="process-title" class="pm__title">Four steps to your place on the map.</h2>
+      </div>
+
+      <div class="pm-split">
+        <ol class="pm-cards">
+          <li class="pm-card" data-step="1">
+            <div class="pm-card__body">
+              <p class="pm-card__head"><span class="pm-card__num" aria-hidden="true">01</span><span class="pm-card__title">Choose your placement</span></p>
+              <p class="pm-card__text">Pick where your company appears on the map and the visibility options that fit.</p>
             </div>
-            <h2 class="leading-[1.15] text-[22px] md:text-[32px] text-ink">
-              Getting your company on the map.
-            </h2>
+            <button class="pm-card__jump" type="button" aria-label="Play from step 1, Choose your placement"></button>
+          </li>
+          <li class="pm-card" data-step="2">
+            <div class="pm-card__body">
+              <p class="pm-card__head"><span class="pm-card__num" aria-hidden="true">02</span><span class="pm-card__title">Send your logo</span></p>
+              <p class="pm-card__text">Submit your vector logo and placement specs.</p>
+            </div>
+            <button class="pm-card__jump" type="button" aria-label="Play from step 2, Send your logo"></button>
+          </li>
+          <li class="pm-card" data-step="3">
+            <div class="pm-card__body">
+              <p class="pm-card__head"><span class="pm-card__num" aria-hidden="true">03</span><span class="pm-card__title">Approve your proof</span></p>
+              <p class="pm-card__text">Our art department prepares your placement for approval.</p>
+            </div>
+            <button class="pm-card__jump" type="button" aria-label="Play from step 3, Approve your proof"></button>
+          </li>
+          <li class="pm-card" data-step="4">
+            <div class="pm-card__body">
+              <p class="pm-card__head"><span class="pm-card__num" aria-hidden="true">04</span><span class="pm-card__title">Welcome to the map</span></p>
+              <p class="pm-card__text">Your company appears on the printed map, alongside the companies already there.</p>
+            </div>
+            <button class="pm-card__jump" type="button" aria-label="Play from step 4, Welcome to the map"></button>
+          </li>
+        </ol>
+
+        <div class="pm-visual">
+          <!-- xMaxYMax slice: o canto inferior direito (onde fica a vaga) nunca é cortado -->
+          <svg id="map" class="pm-map" viewBox="0 0 2896 2172" preserveAspectRatio="xMaxYMax slice" role="img" aria-label="Map of the South San Francisco Bay and Silicon Valley with company locations and your company marked in an available placement.">
+            <defs>
+              <!-- Máscara que "desenha" o círculo tracejado da zona (o JS anima o stroke-dashoffset) -->
+              <mask id="zone-draw" maskUnits="userSpaceOnUse" x="-260" y="-260" width="520" height="520">
+                <circle id="zone-draw-path" class="pm-mask-stroke" r="174" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+              </mask>
+            </defs>
+
+            <image href="assets/map.webp" width="2896" height="2172" />
+            <!-- Tinta azul-marinho: puxa a imagem para a paleta e suaviza as vias claras (opacidade em --pm-tint) -->
+            <rect class="pm-tint" width="2896" height="2172" />
+
+            <!-- Cidades: nomes e posições a confirmar sobre a imagem (texto mono com halo azul-marinho) -->
+            <g id="cities" class="pm-city">
+              <text x="1700" y="1040">PALO ALTO</text>
+              <text x="2160" y="1150">MOUNTAIN VIEW</text>
+              <text x="2480" y="930">SUNNYVALE</text>
+              <text x="1420" y="1930">CUPERTINO</text>
+            </g>
+
+            <!-- Empresas (●) sobre áreas urbanas -->
+            <g id="members">
+              <circle class="pm-member" cx="1640" cy="960" r="13" />
+              <circle class="pm-member" cx="1900" cy="1110" r="13" />
+              <circle class="pm-member" cx="2380" cy="1000" r="13" />
+              <circle class="pm-member" cx="2640" cy="1060" r="13" />
+              <circle class="pm-member" cx="2700" cy="1240" r="13" />
+              <circle class="pm-member" cx="1660" cy="1300" r="13" />
+              <circle class="pm-member" cx="2560" cy="1760" r="13" />
+              <circle class="pm-member" cx="1700" cy="1995" r="13" />
+            </g>
+
+            <!-- Vaga: tudo relativo ao ponto PLACEMENT (o JS aplica o translate a partir das constantes).
+                 Medidas em função do raio da zona R = 6% da largura = 174 -->
+            <g id="placement" transform="translate(2100 1600)">
+              <g class="pm-ov">
+                <g id="l-zoneFill" class="pm-layer"><circle class="pm-scrim" r="174" /></g>
+                <g id="l-zone" class="pm-layer"><circle class="pm-zone" r="174" mask="url(#zone-draw)" /></g>
+                <g id="l-zoneLabel" class="pm-layer pm-ov-text pm-ov-text--lg pm-orange-text" text-anchor="end">
+                  <text x="-204" y="-50">AVAILABLE</text><text x="-204" y="24">PLACEMENT</text>
+                </g>
+
+                <g id="l-grid" class="pm-layer">
+                  <path class="pm-grid-line pm-grid-line--frame" d="M-141 -141H141V141H-141Z" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line" d="M-70.5 -141V141" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line" d="M0 -141V141" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line" d="M70.5 -141V141" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line" d="M-141 -70.5H141" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line" d="M-141 0H141" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line" d="M-141 70.5H141" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line pm-grid-line--tick" d="M-141 -167H141M-141 -179V-155M141 -179V-155" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-grid-line pm-grid-line--tick" d="M-167 -141V141M-179 -141H-155M-179 141H-155" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <text class="pm-grid-mm pm-ov-text pm-ov-text--sm pm-orange-text" x="0" y="-188" text-anchor="middle">24 mm</text>
+                </g>
+
+                <g id="l-slot" class="pm-layer"><circle class="pm-slot" r="75" /></g>
+
+                <!-- Empresa de exemplo, fictícia -->
+                <g id="l-logo" class="pm-layer">
+                  <rect class="pm-logo-mark" x="-62" y="-62" width="124" height="124" rx="12" />
+                  <text class="pm-logo-letter" x="0" y="34" text-anchor="middle">H</text>
+                  <g class="pm-ov-text" text-anchor="end">
+                    <text class="pm-ov-text--lg pm-cream-text" x="-204" y="92">HALDEN LABS</text>
+                    <text class="pm-ov-text--sm pm-light-text" x="-204" y="148">SAMPLE COMPANY</text>
+                  </g>
+                </g>
+
+                <!-- Marcas de prova: cortes nos 4 cantos, 2 registros (em cima e embaixo) e a etiqueta PROOF -->
+                <g id="l-proof" class="pm-layer">
+                  <path class="pm-proof-line" d="M-207 -207H-249M-207 -207V-249" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-proof-line" d="M207 -207H249M207 -207V-249" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-proof-line" d="M-207 207H-249M-207 207V249" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <path class="pm-proof-line" d="M207 207H249M207 207V249" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+                  <g transform="translate(0 -270)"><circle class="pm-proof-line" r="17" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" /><path class="pm-proof-line" d="M-30 0H30M0 -30V30" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" /></g>
+                  <g transform="translate(0 270)"><circle class="pm-proof-line" r="17" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" /><path class="pm-proof-line" d="M-30 0H30M0 -30V30" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" /></g>
+                  <g id="proof-tag">
+                    <rect class="pm-proof-tag" x="265" y="-262" width="170" height="52" />
+                    <text class="pm-proof-tag-text" x="350" y="-225" text-anchor="middle">PROOF</text>
+                  </g>
+                </g>
+
+                <g id="l-marker" class="pm-layer">
+                  <circle id="ring" class="pm-ring" r="0" />
+                  <circle id="marker-dot" class="pm-marker-dot" r="36" />
+                </g>
+                <!-- Rótulo final: à direita do marcador (no mobile, o CSS leva para a esquerda, onde cabe) -->
+                <g id="l-label" class="pm-layer pm-ov-text">
+                  <g class="pm-label-pos">
+                    <text class="pm-ov-text--xl pm-cream-text" x="60" y="-10">YOUR COMPANY</text>
+                    <text class="pm-ov-text--md pm-orange-text" x="60" y="58">YOUR PLACE ON THE MAP</text>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+
+          <div id="l-legend" class="pm-legend pm-layer" aria-hidden="true">
+            <div class="pm-legend__title">Legend</div>
+            <div class="pm-legend__row"><i class="pm-sym pm-sym--company"></i>Company</div>
+            <div class="pm-legend__row"><i class="pm-sym pm-sym--available"></i>Available placement</div>
+            <div class="pm-legend__row"><i class="pm-sym pm-sym--yours"></i>Your company</div>
           </div>
 
-          <a href="#" class="order-3 md:order-2 group inline-flex items-center gap-2 border-b-2 border-signal-orange pb-2 font-semibold transition-all duration-300 hover:border-b-4 hover:pb-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal-orange motion-reduce:transition-none w-fit">View packages <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-
-          <div class="relative order-2 md:order-3 md:basis-full">
-          <span id="process-fill" class="absolute left-1.5 top-1.5 z-10 hidden h-px w-3/4 origin-left scale-x-0 bg-signal-orange md:block" aria-hidden="true"></span>
-          <ol class="grid grid-cols-1 md:grid-cols-4 md:gap-0">
-            <li data-process-step="1" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
-              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
-              <div class="flex items-center gap-3 mb-4">
-                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">01</span>
-                <img src="./assets/icons/selection.svg" alt="Selection Icon"/>
-              </div>
-              <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Choose your package</h3>
-              <p class="font-sans text-base leading-relaxed text-ink">Choose the visibility options that fit your company.</p>
-            </li>
-
-            <li data-process-step="2" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
-              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
-              <div class="flex items-center gap-3 mb-4">
-                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">02</span>
-                <img src="assets/icons/upload-simple.svg" alt="Upload icon"/>
-              </div>
-              <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Send your artwork</h3>
-              <p class="font-sans text-base leading-relaxed text-ink">Submit your vector logo and placement specs.</p>
-            </li>
-
-            <li data-process-step="3" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
-              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
-              <div class="flex items-center gap-3 mb-4">
-                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">03</span>
-                <img src="assets/icons/check-square-offset.svg" alt=""/>
-              </div>
-              <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Approve your proof</h3>
-              <p class="font-sans text-base leading-relaxed text-ink">Our art department prepares your placement for approval.</p>
-            </li>
-
-            <!-- 04: último passo. Aceso, o número usa o laranja -dark para o texto pequeno ter contraste 4.8:1 -->
-            <li data-process-step="4" class="relative pl-8 pb-10 border-l border-ink/20 last:pb-0 last:border-l-transparent md:pl-0 md:pb-0 md:pt-8 md:pr-8 md:border-l-0 md:before:absolute md:before:left-0 md:before:top-1.5 md:before:h-px md:before:w-full md:before:bg-ink/20 md:last:before:w-0">
-              <span class="process-diamond absolute -left-1.5 top-2.5 z-20 size-3 rotate-45 border-2 border-signal-orange bg-off-white transition-colors duration-300 motion-reduce:transition-none md:left-0 md:top-0" aria-hidden="true"></span>
-              <div class="flex items-center gap-3 mb-4">
-                <span class="process-number font-mono text-sm font-semibold text-silicon-blue transition-colors duration-300 motion-reduce:transition-none">04</span>
-                <img src="assets/icons/circutry.svg" alt="Circutry Icon"/>
-              </div>
-              <h3 class="font-display font-semibold text-xl lg:text-2xl leading-snug mb-2 text-ink">Welcome to the map</h3>
-              <p class="font-sans text-base leading-relaxed text-ink">Your company appears on the printed map.</p>
-            </li>
-          </ol>
-          </div>
+          <button id="pm-toggle" class="pm-toggle" type="button" aria-pressed="false" aria-label="Pause animation">
+            <svg class="pm-toggle__icon" viewBox="0 0 12 12" aria-hidden="true">
+              <path class="pm-toggle__pause" d="M3 2h2v8H3zM7 2h2v8H7z" />
+              <path class="pm-toggle__play" d="M3 1.5v9l7-4.5z" />
+            </svg>
+            <span class="pm-toggle__label" aria-hidden="true">Pause</span>
+          </button>
         </div>
       </div>
     </section>
@@ -672,9 +775,10 @@
         <p class="text-base md:text-xl text-ink mb-[22px] leading-[1.6] sm:max-w-[560px] sm:mx-auto">
           Join leading technology companies and increase your visibility across the Silicon Valley ecosystem.
         </p>
-        <a href="#" class="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-signal-orange px-5 py-3 font-semibold leading-none text-ink transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange-dark before:transition-transform before:duration-500 hover:text-off-white hover:before:translate-x-0 focus-visible:text-off-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silicon-blue focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none w-full justify-center sm:w-auto">Become a sponsor <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="group relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-sm border-2 border-signal-orange bg-signal-orange px-5 py-3 font-semibold leading-none text-ink transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-signal-orange-dark before:transition-transform before:duration-500 hover:text-off-white hover:before:translate-x-0 focus-visible:text-off-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silicon-blue focus-visible:before:translate-x-0 motion-reduce:transition-none motion-reduce:before:transition-none w-full justify-center sm:w-auto">Get on the map <svg class="h-8 w-8 shrink-0 -rotate-45 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L17 12L13 16M15 10L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </section>
+    </main>
 
     <footer class="w-full bg-silicon-blue">
       <div class="container-line px-5 py-8 sm:px-8 sm:py-10 lg:py-14">
@@ -788,9 +892,24 @@
         updateHeader();
       }
 
+      // Luz da hero centrada no pôster; no mobile (< 820px) a elipse acompanha a largura do pôster
+      const heroBg = document.getElementById("hero-bg");
+      const heroPoster = document.querySelector(".hero-poster__img");
+
+      function centerSpotlight() {
+        const wall = heroBg.getBoundingClientRect();
+        const poster = heroPoster.getBoundingClientRect();
+        heroBg.style.setProperty("--spot-x", `${poster.left + poster.width / 2 - wall.left}px`);
+        heroBg.style.setProperty("--spot-y", `${poster.top + poster.height / 2 - wall.top}px`);
+        const mobile = window.innerWidth < 820;
+        heroBg.style.setProperty("--spot-rx", mobile ? `${poster.width * 1.05}px` : "25%");
+        heroBg.style.setProperty("--spot-ry", mobile ? `${poster.height * 0.78}px` : "33%");
+      }
+
       window.addEventListener("scroll", updateHeader, { passive: true });
       window.addEventListener("resize", setHeaderHeight);
       setHeaderHeight();
+      new ResizeObserver(centerSpotlight).observe(heroBg);
     </script>
     <script src="js/vendor/gsap.min.js"></script>
     <script src="js/vendor/ScrollTrigger.min.js"></script>

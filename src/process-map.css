@@ -1,0 +1,446 @@
+/* ==========================================================================
+   SECTION: How you get on the map (#process)
+   Cards à esquerda, mapa com overlay SVG à direita, animação em loop (js/process.js).
+   Cores só pelos tokens do @theme. Sem JS (html sem .js): estado final e cards em opacidade total
+   ========================================================================== */
+
+.pm {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-plex);
+}
+
+.pm__inner {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: 72px 32px 32px;
+}
+
+.pm__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-blue-medium);
+}
+
+.pm__title {
+  margin-top: 14px;
+  max-width: 640px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+  color: var(--color-silicon-blue);
+}
+
+/* ---------- Duas metades (cabem numa tela, abaixo do header fixo) ---------- */
+
+.pm-split {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: clamp(560px, calc(100svh - var(--header-h, 80px)), 900px);
+}
+
+/* ---------- Cards (planos: sem borda, sombra, gradiente ou canto arredondado) ---------- */
+
+.pm-cards {
+  /* Margem do grid de 1280px da página: o texto alinha com o resto do conteúdo e o fundo sangra até a borda */
+  --pm-edge: max(32px, calc((100cqw - 1280px) / 2 + 32px));
+  display: grid;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pm-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  padding: 0 40px 0 var(--pm-edge);
+  color: var(--color-cream);
+}
+
+.pm-card[data-step="1"] { background: var(--color-blue-medium); }
+.pm-card[data-step="2"] { background: var(--color-blue-deep); }
+.pm-card[data-step="3"] { background: var(--color-silicon-blue); }
+.pm-card[data-step="4"] { background: var(--color-ink); }
+
+/* Só opacidade: texto do card ativo a 100%, os outros a 60% */
+.pm-card__body {
+  max-width: 460px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.js .pm-card__body {
+  opacity: 0.6;
+}
+
+.js .pm-card.is-active .pm-card__body {
+  opacity: 1;
+}
+
+.pm-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.pm-card__num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-signal-orange);
+}
+
+.pm-card__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--color-cream);
+}
+
+/* Creme sobre #2C6E9E (card mais claro) = 5.0:1 com o card ativo */
+.pm-card__text {
+  margin-top: 8px;
+  font-family: var(--font-plex);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-cream);
+}
+
+/* Clique no card: pula para o início do passo (botão invisível cobrindo o card) */
+.pm-card__jump {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.pm-card__jump:focus-visible {
+  outline: 2px solid var(--color-cream);
+  outline-offset: -6px;
+}
+
+html:not(.js) .pm-card__jump {
+  display: none;
+}
+
+/* ---------- Mapa (metade direita, sangria total) ---------- */
+
+.pm-visual {
+  --pm-tint: 0.22; /* opacidade da tinta azul-marinho sobre a imagem */
+  position: relative;
+  overflow: hidden;
+  background: var(--color-silicon-blue); /* placeholder enquanto a imagem carrega */
+}
+
+.pm-map {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pm-map text {
+  font-family: var(--font-plex-mono);
+}
+
+.pm-tint {
+  fill: var(--color-silicon-blue);
+  opacity: var(--pm-tint);
+  mix-blend-mode: multiply;
+}
+
+/* Cidades: mono com halo azul-marinho (paint-order) para ler sobre as vias */
+.pm-city text {
+  fill: var(--color-cream);
+  font-size: 34px;
+  letter-spacing: 0.1em;
+  stroke: var(--color-silicon-blue);
+  stroke-width: 10px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+/* Empresas: ponto claro com halo azul-marinho (um ponto escuro some sobre o mapa azul) */
+.pm-member {
+  fill: var(--color-blue-light);
+  stroke: var(--color-silicon-blue);
+  stroke-width: 6px;
+}
+
+/* Texto do overlay: halo azul-marinho em todos */
+.pm-ov-text text,
+text.pm-ov-text {
+  letter-spacing: 0.08em;
+  stroke: var(--color-silicon-blue);
+  stroke-width: 9px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+.pm-ov-text--xl { font-size: 38px; font-weight: 500; }
+.pm-ov-text--lg { font-size: 34px; }
+.pm-ov-text--md { font-size: 28px; }
+.pm-ov-text--sm { font-size: 26px; }
+
+.pm-orange-text { fill: var(--color-signal-orange); }
+.pm-cream-text { fill: var(--color-cream); }
+.pm-light-text { fill: var(--color-blue-light); }
+
+.pm-mask-stroke { fill: none; stroke: var(--color-white); stroke-width: 40px; }
+.pm-scrim { fill: var(--color-silicon-blue); }
+.pm-zone { fill: none; stroke: var(--color-signal-orange); stroke-width: 5px; stroke-dasharray: 18 12; }
+
+/* Linhas que se "desenham": pathLength="1" e stroke-dasharray="1" no HTML; o JS anima o atributo stroke-dashoffset de 1 a 0 */
+.pm-grid-line,
+.pm-proof-line {
+  fill: none;
+}
+
+.pm-grid-line { stroke: var(--color-signal-orange); stroke-width: 2px; stroke-opacity: 0.55; }
+.pm-grid-line--frame { stroke-width: 3px; stroke-opacity: 0.9; }
+.pm-grid-line--tick { stroke-width: 2.5px; stroke-opacity: 0.9; }
+
+.pm-slot { fill: var(--color-cream); stroke: var(--color-silicon-blue); stroke-width: 4px; stroke-dasharray: 12 10; }
+.pm-logo-mark { fill: var(--color-silicon-blue); stroke: var(--color-cream); stroke-width: 3px; }
+.pm-map .pm-logo-letter { fill: var(--color-cream); font-family: var(--font-display); font-weight: 600; font-size: 96px; }
+
+.pm-proof-line { stroke: var(--color-cream); stroke-width: 3px; }
+.pm-proof-tag { fill: var(--color-ink); }
+.pm-map .pm-proof-tag-text { fill: var(--color-cream); font-size: 30px; letter-spacing: 0.12em; }
+
+.pm-ring { fill: none; stroke: var(--color-signal-orange); stroke-width: 5px; opacity: 0; }
+.pm-marker-dot { fill: var(--color-signal-orange); stroke: var(--color-cream); stroke-width: 8px; }
+
+/* Camadas: o JS controla a opacidade. Sem JS, mostra o estado final */
+.pm-layer {
+  opacity: 0;
+}
+
+html:not(.js) #l-zone,
+html:not(.js) #l-marker,
+html:not(.js) #l-label,
+html:not(.js) #l-legend {
+  opacity: 1;
+}
+
+/* ---------- Legenda (HTML, canto inferior esquerdo da imagem) ---------- */
+
+.pm-legend {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 9px 12px 8px;
+  background: color-mix(in srgb, var(--color-cream) 95%, transparent);
+  font-family: var(--font-plex-mono);
+  font-size: 10px;
+  color: var(--color-ink);
+}
+
+.pm-legend__title {
+  margin-bottom: 6px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.pm-legend__row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 0;
+  line-height: 1;
+}
+
+.pm-sym {
+  display: inline-block;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.pm-sym--company {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background: var(--color-blue-light);
+  box-shadow: 0 0 0 1.5px var(--color-silicon-blue);
+}
+
+.pm-sym--available {
+  border: 1.3px dashed var(--color-signal-orange);
+}
+
+.pm-sym--yours {
+  width: 10px;
+  height: 10px;
+  margin: 0 1px;
+  background: var(--color-signal-orange);
+}
+
+/* ---------- Pausar / tocar (quadrado plano, canto inferior direito da imagem) ---------- */
+
+.pm-toggle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--color-silicon-blue);
+  color: var(--color-cream);
+  border: 0;
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pm-toggle:focus-visible {
+  outline: 2px solid var(--color-cream);
+  outline-offset: -5px;
+}
+
+.pm-toggle__icon {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.pm-toggle__play { display: none; }
+.pm-toggle[aria-pressed="true"] .pm-toggle__pause { display: none; }
+.pm-toggle[aria-pressed="true"] .pm-toggle__play { display: inline; }
+
+/* Sem JS não há o que pausar */
+html:not(.js) .pm-toggle {
+  display: none;
+}
+
+/* ---------- Mobile (abaixo de 820px): imagem em cima, cards embaixo, tudo numa tela ---------- */
+
+@media (max-width: 820px) {
+  .pm__inner {
+    padding: 40px 20px 24px;
+  }
+
+  .pm-split {
+    grid-template-columns: 1fr;
+    grid-template-rows: 42svh minmax(0, 1fr);
+    height: calc(100svh - var(--header-h, 64px));
+    max-height: 100svh;
+  }
+
+  .pm-visual {
+    grid-row: 1;
+  }
+
+  .pm-cards {
+    grid-row: 2;
+  }
+
+  .pm-card {
+    padding: 0 16px;
+  }
+
+  .pm-card__head {
+    gap: 10px;
+  }
+
+  .pm-card__num {
+    font-size: 26px;
+  }
+
+  .pm-card__title {
+    font-size: 22px;
+  }
+
+  .pm-card__text {
+    margin-top: 3px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  /* Overlay maior para continuar legível na imagem pequena */
+  .pm-ov {
+    transform: scale(1.3);
+  }
+
+  .pm-city text { font-size: 64px; stroke-width: 16px; }
+  .pm-member { r: 20px; stroke-width: 8px; }
+  .pm-ov-text--xl { font-size: 52px; }
+  .pm-ov-text--lg { font-size: 48px; }
+  .pm-ov-text--md { font-size: 44px; }
+  .pm-ov-text--sm { font-size: 38px; }
+  .pm-ov-text text,
+  text.pm-ov-text { stroke-width: 12px; }
+  .pm-map .pm-proof-tag-text { font-size: 38px; }
+
+  /* Rótulo final à esquerda do marcador: à direita, com a fonte maior, passaria da borda */
+  .pm-label-pos {
+    transform: translateX(-120px);
+    text-anchor: end;
+  }
+
+  .pm-legend {
+    padding: 5px 7px;
+    font-size: 8px;
+  }
+
+  .pm-legend__title {
+    display: none;
+  }
+
+  .pm-legend__row {
+    gap: 6px;
+    padding: 2px 0;
+  }
+
+  .pm-toggle {
+    gap: 6px;
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+
+  .pm-toggle__icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Telas baixas: cards mais compactos para caber sem cortar o texto */
+@media (max-width: 820px) and (max-height: 700px) {
+  .pm-card__num { font-size: 22px; }
+  .pm-card__title { font-size: 19px; }
+  .pm-card__text { font-size: 13px; line-height: 1.3; }
+}
+
+/* Movimento reduzido: sem autoplay; estado final e os 4 cards em opacidade total */
+@media (prefers-reduced-motion: reduce) {
+  .js .pm-card__body {
+    opacity: 1;
+    transition: none;
+  }
+
+  .pm-toggle,
+  .pm-card__jump {
+    display: none;
+  }
+}

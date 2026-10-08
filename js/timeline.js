@@ -336,8 +336,13 @@ if (timeline) {
     ScrollTrigger.refresh();
   }
 
+  // Só a largura muda o layout da timeline. No mobile a barra de endereço muda a altura a cada scroll,
+  // e refazer a rota + ScrollTrigger.refresh() nesses eventos travaria a rolagem
   let resizeTimer;
+  let lastWidth = window.innerWidth;
   window.addEventListener("resize", () => {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(refreshRoute, 150);
   });
