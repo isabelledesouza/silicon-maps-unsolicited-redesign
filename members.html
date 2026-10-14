@@ -7,7 +7,6 @@
     <title>Who's on the map · Silicon Maps</title>
   </head>
   <body class="font-sans text-ink bg-off-white">
-    <!-- HEADER: nas páginas internas fica sticky e azul sólido desde o topo (o banner logo abaixo também é azul) -->
     <header
       id="site-header"
       class="text-white sticky top-0 z-100 w-full bg-silicon-blue border-b border-off-white/10"
@@ -71,7 +70,6 @@
     </header>
 
     <main>
-      <!-- BANNER: padrão das páginas internas. ~30% da viewport, azul navy com o grid técnico da hero, h1 sempre aqui dentro -->
       <section class="relative overflow-hidden bg-silicon-blue min-h-[30vh] flex items-center">
         <div class="hero-grid" aria-hidden="true"></div>
         <div class="relative z-10 container-line px-5 sm:px-8 py-12">
@@ -87,8 +85,6 @@
         </div>
       </section>
 
-      <!-- FILTROS: nível 1 = categoria (azul quando ativa), nível 2 = região da categoria escolhida (laranja quando ativa).
-           O estado ativo vem do aria-pressed (variant aria-pressed: do Tailwind), o JS só troca o atributo -->
       <section class="container-line px-5 sm:px-8 pt-10 sm:pt-12">
         <div class="grid grid-cols-12 gap-y-6">
           <div class="col-span-12">
@@ -147,7 +143,6 @@
             </div>
           </div>
 
-          <!-- Nível 2: só aparece com uma categoria escolhida; cada categoria tem seu grupo de regiões -->
           <div id="region-filter" class="hidden col-span-12">
             <div class="text-[11px] tracking-[0.08em] uppercase text-blue-medium mb-3" id="region-label">
               Region
@@ -181,11 +176,8 @@
         </div>
       </section>
 
-      <!-- GRID DE MEMBROS: 1 col no mobile, 2 no sm, 3 no lg, 4 no xl. Os cards esticam até a altura da linha e o botão fica sempre no pé.
-           Filtro: o JS esconde/mostra cada <article> pelo data-category + data-region -->
       <section class="container-line px-5 sm:px-8 pt-6 pb-14 sm:pb-16 lg:pb-20" aria-label="Member companies">
         <div class="grid grid-cols-12 gap-6">
-          <!-- ===== HIGH TECH ===== -->
           <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="high-tech" data-region="south-bay">
             <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
               <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
@@ -276,7 +268,6 @@
             </div>
           </article>
 
-          <!-- ===== INTERNATIONAL ===== -->
           <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="international" data-region="europe">
             <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
               <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
@@ -352,7 +343,6 @@
             </div>
           </article>
 
-          <!-- ===== LIFE SCIENCES ===== -->
           <article class="member-card col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3" data-category="life-sciences" data-region="bay-area">
             <div class="h-full flex flex-col bg-off-white border border-blue-light p-6 transition-shadow hover:border-blue-medium hover:shadow-md">
               <div class="w-12 h-12 flex items-center justify-center bg-blue-light mb-5">
@@ -430,7 +420,6 @@
         </div>
       </section>
 
-      <!-- DEPOIMENTOS: fecho da página. Depois de ver quem está no mapa, o visitante ouve o que os membros dizem sobre estar lá -->
       <section class="testimonials w-full bg-silicon-blue">
         <div class="container-line px-5 py-12 sm:px-8 sm:py-14 lg:py-20">
           <div class="text-[11px] tracking-[0.08em] uppercase text-blue-light mb-2 flex items-center gap-2">
@@ -547,7 +536,6 @@
         drawer.classList.toggle("flex");
       }
 
-      // Filtros: categoria (nível 1) + região (nível 2). Um card aparece se bater com os dois
       const cards = document.querySelectorAll(".member-card");
       const categoryButtons = document.querySelectorAll("[data-filter-category]");
       const regionFilter = document.getElementById("region-filter");
@@ -578,7 +566,6 @@
           activeRegion = "all";
           setPressed(categoryButtons, button);
 
-          // Mostra só o grupo de regiões da categoria escolhida, sempre voltando para "All regions"
           regionFilter.classList.toggle("hidden", activeCategory === "all");
           regionGroups.forEach((group) => {
             const isActive = group.dataset.regionGroup === activeCategory;

@@ -1,28 +1,28 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// Cores (tokens do @theme em src/input.css). Troque aqui para mudar a rota e os marcadores
-const ROUTE_BG_CLASS = "stroke-ink/15";
-const ROUTE_FILL_CLASS = "stroke-signal-orange";
-const MARKER_IDLE_CLASS = "bg-ink/25";
+const ROUTE_BG_CLASS = "stroke-blue-medium/45";
+const ROUTE_FILL_CLASS = "stroke-silicon-blue";
+const MARKER_IDLE_CLASS = "bg-blue-medium";
 const MARKER_REACHED_CLASS = "bg-signal-orange";
 
-// Ponto da tela onde a rota "está": a rota, os marcadores e o navegador usam o mesmo
 const VIEWPORT_POINT = "50%";
 
-// Variação da rota (px). A semente fixa faz a rota sair igual em cada carga e resize; troque-a para sortear outro traçado
 const ROUTE_SEED = 1989;
-const ROUTE_OFFSET_BASE = 28; // desvio lateral base de cada trecho
-const ROUTE_OFFSET_RANGE = [0.4, 1.2]; // fração do desvio base sorteada por trecho
-const ROUTE_RADIUS_RANGE = [6, 28]; // raio de cada canto
-const ROUTE_BREAK_RANGE = [0.25, 0.75]; // onde, na altura do trecho, ficam as quebras horizontais
-const ROUTE_SECOND_BREAK_CHANCE = 0.5; // chance de uma 2ª quebra, mais curta, antes do marcador
-const ROUTE_TILT_MAX = 6; // inclinação máxima dos trechos verticais
-const ROUTE_CLEARANCE = 24; // distância mínima até o texto e a imagem dos itens
-const ROUTE_MOBILE_FACTOR = 0.5; // abaixo de md, todos os desvios caem pela metade
-const ROUTE_STROKE = 4;
+const ROUTE_DRIFT_RANGE = [0.04, 0.08];
+const ROUTE_DRIFT_KEEP = [0.6, 1];
+const ROUTE_TURN_Y = [[0.22, 0.34], [0.62, 0.76]];
+const ROUTE_STRAIGHT = 28;
+const ROUTE_RADIUS = 18;
+const ROUTE_CLEARANCE = 8;
+const ROUTE_STROKE = 3;
+const CONTOUR_OFFSETS = [-0.24, 0.29];
+const CONTOUR_WOBBLE = 0.03;
+const BEYOND_RISE = 44;
+const BEYOND_RISE_MOBILE = 58;
+const PLANE_STOP = 0.78;
+const PLANE_FLIGHT = 1.8;
 const desktopQuery = window.matchMedia("(min-width: 768px)");
 
-// Gerador pseudoaleatório com semilla (mulberry32): mesma sequência sempre, ao contrário de Math.random()
 function mulberry32(seed) {
   let a = seed >>> 0;
   return () => {
@@ -42,28 +42,68 @@ if (timeline) {
   const items = gsap.utils.toArray(".timeline-item", timeline);
   const markers = gsap.utils.toArray(".timeline-marker", timeline);
   const navLinks = gsap.utils.toArray(".timeline-nav a[data-nav]");
+  const contours = gsap.utils.toArray("#route-contours path");
+  const signs = gsap.utils.toArray("#route-signs textPath");
+  const beyond = document.getElementById("route-beyond");
+  const beyondArc = document.getElementById("route-arc");
+  const plane = document.getElementById("route-plane");
+  const arcReveal = document.getElementById("route-arc-reveal");
+  const flight = { t: PLANE_STOP, trail: 1 };
+  let flightTween = null;
 
   routeBg.classList.add(ROUTE_BG_CLASS);
   routeFill.classList.add(ROUTE_FILL_CLASS);
 
-  // O primeiro e o último ("You") ficam sempre quadrados; só os do meio viram losango
   const isMiddle = (index) => index > 0 && index < markers.length - 1;
 
-  // Rotação fica com o GSAP (os marcadores não usam rotate-45); a cor é só troca de classe
   gsap.set(markers, { rotation: 0 });
 
   function setMarkerReached(marker, reached, animate = true) {
     marker.classList.toggle(MARKER_IDLE_CLASS, !reached);
     marker.classList.toggle(MARKER_REACHED_CLASS, reached);
+    if (markers.indexOf(marker) === markers.length - 1) setBeyond(reached, animate);
     if (!isMiddle(markers.indexOf(marker))) return;
     const rotation = reached ? 45 : 0;
     if (animate) gsap.to(marker, { rotation, duration: 0.4, ease: "power2.out", overwrite: true });
     else gsap.set(marker, { rotation });
   }
 
-  // ---------- Rota ----------
+  function renderFlight() {
+    const length = beyondArc.getTotalLength();
+    if (!length) return;
+    const at = beyondArc.getPointAtLength(length * flight.t);
+    const ahead = beyondArc.getPointAtLength(Math.min(length, length * flight.t + 1));
+    const angle = (Math.atan2(ahead.y - at.y, ahead.x - at.x) * 180) / Math.PI;
+    plane.setAttribute("transform", `translate(${at.x.toFixed(1)} ${at.y.toFixed(1)}) rotate(${angle.toFixed(1)})`);
+    arcReveal.setAttribute("stroke-dashoffset", (1 - flight.trail).toFixed(4));
+  }
 
-  // Centro de cada marcador relativo à .timeline (a rotação não muda o centro do retângulo)
+  function setBeyond(reached, animate) {
+    if (flightTween) flightTween.kill();
+    if (!reached) {
+      if (animate) gsap.to(beyond, { opacity: 0, duration: 0.4, overwrite: true });
+      else gsap.set(beyond, { opacity: 0 });
+      return;
+    }
+    if (!animate) {
+      gsap.set(beyond, { opacity: 1 });
+      Object.assign(flight, { t: PLANE_STOP, trail: 1 });
+      renderFlight();
+      return;
+    }
+    Object.assign(flight, { t: 0, trail: 0 });
+    renderFlight();
+    gsap.to(beyond, { opacity: 1, duration: 0.3, overwrite: true });
+    flightTween = gsap.timeline({ onUpdate: renderFlight })
+      .to(flight, {
+        t: PLANE_STOP,
+        duration: PLANE_FLIGHT,
+        ease: "power1.inOut",
+        onUpdate: () => { flight.trail = flight.t; },
+      })
+      .to(flight, { trail: 1, duration: 0.5, ease: "power1.out" });
+  }
+
   function markerCenters(box) {
     return markers.map((marker) => {
       const rect = marker.getBoundingClientRect();
@@ -71,7 +111,6 @@ if (timeline) {
     });
   }
 
-  // Texto e imagem de cada item relativos à .timeline, sem o y da animação de entrada
   function obstacleRects(box) {
     return items.flatMap((item) => {
       const content = item.querySelector(".timeline-content");
@@ -83,8 +122,6 @@ if (timeline) {
     });
   }
 
-  // Quanto a rota pode se afastar de x para um lado (side = 1 direita, -1 esquerda) entre yTop e yBottom
-  // sem chegar a menos de ROUTE_CLEARANCE do texto/imagem nem sair da .timeline
   function roomTo(side, x, yTop, yBottom, rects, width) {
     const margin = ROUTE_CLEARANCE + ROUTE_STROKE / 2;
     let room = side > 0 ? width - x - ROUTE_STROKE / 2 : x - ROUTE_STROKE / 2;
@@ -96,78 +133,43 @@ if (timeline) {
     return Math.max(room, 0);
   }
 
-  // Polilinha em degraus, com valores próprios em cada trecho: entre dois marcadores desce (levemente inclinada),
-  // desvia para o lado (alternando), desce, às vezes faz uma 2ª quebra mais curta, volta ao centro e entra no marcador.
-  // Guarda o índice do ponto de cada marcador e o raio de cada canto (0 nos marcadores, para a rota passar no centro)
-  function stepPoints(centers, rects, width, scale) {
+  function roadPoints(centers, rects, width, radius) {
     const random = mulberry32(ROUTE_SEED);
     const between = (min, max) => min + (max - min) * random();
     const points = [centers[0]];
     const radii = [0];
     const markerIndex = [0];
 
-    // Inclinação de um trecho vertical: sorteada, limitada pelo espaço livre e pelo menor degrau vizinho
-    const tilt = (value, x, yTop, yBottom, limit) => {
-      const side = Math.sign(value) || 1;
-      return side * Math.min(Math.abs(value), roomTo(side, x, yTop, yBottom, rects, width), limit);
-    };
-
     for (let i = 1; i < centers.length; i++) {
       const from = centers[i - 1];
       const to = centers[i];
       const height = to.y - from.y;
       const side = i % 2 === 1 ? 1 : -1;
+      const xAt = (t) => from.x + (to.x - from.x) * t;
 
-      // Sorteia sempre a mesma quantidade de números, para um trecho não mudar os seguintes
-      const offsetDraw = between(...ROUTE_OFFSET_RANGE);
-      const break1Draw = between(ROUTE_BREAK_RANGE[0], (ROUTE_BREAK_RANGE[0] + ROUTE_BREAK_RANGE[1]) / 2);
-      const break2Draw = random();
-      const secondBreak = random() < ROUTE_SECOND_BREAK_CHANCE;
-      const secondOffsetDraw = between(0.3, 0.6);
-      const break3Draw = between(0.35, 0.65);
-      const tiltDraws = [0, 1, 2, 3].map(() => between(-ROUTE_TILT_MAX, ROUTE_TILT_MAX) * scale);
-      const radiusDraws = [0, 1, 2, 3, 4, 5].map(() => between(...ROUTE_RADIUS_RANGE));
+      const driftDraw = between(...ROUTE_DRIFT_RANGE);
+      const keepDraw = between(...ROUTE_DRIFT_KEEP);
+      const t1 = between(...ROUTE_TURN_Y[0]);
+      const t2 = between(...ROUTE_TURN_Y[1]);
 
-      // 1ª quebra na metade de cima da faixa, 2ª pelo menos 15% abaixo dela; as duas entre 25% e 75% da altura
-      const y1 = from.y + height * break1Draw;
-      const break2Min = Math.min(break1Draw + 0.15, ROUTE_BREAK_RANGE[1]);
-      const y2 = from.y + height * (break2Min + (ROUTE_BREAK_RANGE[1] - break2Min) * break2Draw);
-      const y3 = y2 + (to.y - y2) * break3Draw;
+      const straight = Math.min(ROUTE_STRAIGHT, height * 0.08);
+      const y1 = from.y + height * t1;
+      const y2 = from.y + height * t2;
+      const drift = side * Math.min(width * driftDraw, roomTo(side, from.x, y1 - radius, y2 + radius, rects, width));
 
-      // Desvio principal: sorteado e limitado pelo espaço livre do lado, na faixa em que corre
-      const offset = side * Math.min(ROUTE_OFFSET_BASE * scale * offsetDraw, roomTo(side, from.x, y1, y2, rects, width));
-      const offset2 = offset * secondOffsetDraw;
-      const lastJog = secondBreak ? offset2 : offset;
-
-      // Cada inclinação fica abaixo de 1/3 do degrau vizinho, para nenhum degrau inverter de sentido
-      const tilt1 = tilt(tiltDraws[0], from.x, from.y, y1, Math.abs(offset) / 3);
-      const tilt2 = tilt(tiltDraws[1], from.x + offset, y1, y2, Math.abs(offset - (secondBreak ? offset2 : 0)) / 3);
-      const tilt4 = tilt(tiltDraws[3], to.x, y2, to.y, Math.abs(lastJog) / 3);
-
-      const segment = [
-        { x: from.x + tilt1, y: y1 },
-        { x: from.x + offset, y: y1 },
-        { x: from.x + offset + tilt2, y: y2 },
-      ];
-      if (secondBreak) {
-        const tilt3 = tilt(tiltDraws[2], from.x + offset2, y2, y3, Math.abs(offset2) / 3);
-        segment.push({ x: from.x + offset2, y: y2 }, { x: from.x + offset2 + tilt3, y: y3 }, { x: to.x + tilt4, y: y3 });
-      } else {
-        segment.push({ x: to.x + tilt4, y: y2 });
-      }
-
-      segment.forEach((point, index) => {
-        points.push(point);
-        radii.push(radiusDraws[index]);
-      });
-      points.push(to);
-      radii.push(0);
+      points.push(
+        { x: from.x, y: from.y + straight },
+        { x: xAt(t1) + drift, y: y1 },
+        { x: xAt(t2) + drift * keepDraw, y: y2 },
+        { x: to.x, y: to.y - straight },
+        to,
+      );
+      radii.push(radius, radius, radius, radius, 0);
       markerIndex.push(points.length - 1);
     }
     return { points, radii, markerIndex };
   }
 
-  // Polilinha → "d" com cantos arredondados (curva quadrática no vértice); raio 0 = passa exatamente pelo ponto
   function roundedPath(points, radii) {
     const f = (n) => Math.round(n * 10) / 10;
     let d = `M ${f(points[0].x)} ${f(points[0].y)}`;
@@ -191,13 +193,52 @@ if (timeline) {
     return `${d} L ${f(last.x)} ${f(last.y)}`;
   }
 
-  // Gera o "d" dos dois paths e mede em que fração do comprimento cada marcador está,
-  // para a ponta laranja chegar no marcador junto com o gatilho dele
+  function smoothPath(points) {
+    const f = (n) => Math.round(n * 10) / 10;
+    const at = (i) => points[Math.max(0, Math.min(points.length - 1, i))];
+    let d = `M ${f(points[0].x)} ${f(points[0].y)}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = at(i - 1), p1 = at(i), p2 = at(i + 1), p3 = at(i + 2);
+      d += ` C ${f(p1.x + (p2.x - p0.x) / 6)} ${f(p1.y + (p2.y - p0.y) / 6)} ${f(p2.x - (p3.x - p1.x) / 6)} ${f(p2.y - (p3.y - p1.y) / 6)} ${f(p2.x)} ${f(p2.y)}`;
+    }
+    return d;
+  }
+
+  function drawContours(centers, height, width) {
+    const random = mulberry32(ROUTE_SEED + 1);
+    const ys = [-40];
+    centers.forEach((c, i) => ys.push(c.y, (c.y + (i + 1 < centers.length ? centers[i + 1].y : height + 40)) / 2));
+    ys.push(height + 40);
+    contours.forEach((path, index) => {
+      const points = ys.map((y) => ({
+        x: centers[0].x + width * (CONTOUR_OFFSETS[index] + (random() * 2 - 1) * CONTOUR_WOBBLE),
+        y,
+      }));
+      path.setAttribute("d", smoothPath(points));
+    });
+  }
+
+  function drawBeyond(last, box) {
+    const endX = document.documentElement.clientWidth - box.left;
+    const run = endX - last.x;
+    let d;
+    if (desktopQuery.matches) {
+      const endY = last.y - BEYOND_RISE;
+      d = `M ${last.x} ${last.y} C ${last.x + run * 0.3} ${last.y + 6} ${last.x + run * 0.55} ${endY - 6} ${endX} ${endY}`;
+    } else {
+      const endY = last.y - BEYOND_RISE_MOBILE;
+      d = `M ${last.x} ${last.y} C ${last.x} ${endY - 4} ${last.x + run * 0.35} ${endY + 2} ${endX} ${endY}`;
+    }
+    beyondArc.setAttribute("d", d);
+    arcReveal.setAttribute("d", d);
+    renderFlight();
+  }
+
   function buildRoute() {
     const box = timeline.getBoundingClientRect();
-    const scale = desktopQuery.matches ? 1 : ROUTE_MOBILE_FACTOR;
     const centers = markerCenters(box);
-    const { points, radii, markerIndex } = stepPoints(centers, obstacleRects(box), box.width, scale);
+    const radius = desktopQuery.matches ? ROUTE_RADIUS : ROUTE_RADIUS / 2;
+    const { points, radii, markerIndex } = roadPoints(centers, obstacleRects(box), box.width, radius);
 
     const fractions = markerIndex.map((index) => {
       if (index === 0) return 0;
@@ -205,37 +246,40 @@ if (timeline) {
       return routeBg.getTotalLength();
     });
     const total = fractions[fractions.length - 1] || 1;
+    const relative = fractions.map((len) => len / total);
 
     const d = roundedPath(points, radii);
     routeBg.setAttribute("d", d);
     routeFill.setAttribute("d", d);
 
-    return { ys: centers.map((c) => c.y), fractions: fractions.map((len) => len / total) };
+    signs.forEach((sign, index) => {
+      const a = index < relative.length ? relative[index] : 0;
+      const b = index + 1 < relative.length ? relative[index + 1] : 1;
+      sign.setAttribute("startOffset", `${(((a + b) / 2) * 100).toFixed(2)}%`);
+    });
+    drawContours(centers, box.height, box.width);
+    drawBeyond(centers[centers.length - 1], box);
+
+    return { ys: centers.map((c) => c.y), fractions: relative };
   }
 
   let route = buildRoute();
   let onRouteChange = () => {};
 
-  // ---------- Navegador lateral ----------
-
-  // O estilo do ativo vem do atributo data-active; a classe is-active fica como gancho
   let activeId = null;
   function setActiveNav(id) {
     activeId = id;
     navLinks.forEach((link) => {
       const active = link.dataset.nav === id;
-      link.classList.toggle("is-active", active);
       link.toggleAttribute("data-active", active);
     });
   }
 
-  // Ativo é o item que ocupa o meio da tela (data-nav = id do item)
   items.forEach((item) => {
     ScrollTrigger.create({
       trigger: item,
       start: `top ${VIEWPORT_POINT}`,
       end: `bottom ${VIEWPORT_POINT}`,
-      // markers: true,
       onToggle: (self) => {
         if (self.isActive) setActiveNav(item.id);
         else if (activeId === item.id) setActiveNav(null);
@@ -243,14 +287,9 @@ if (timeline) {
     });
   });
 
-  // ---------- Animações ----------
-
   const mm = gsap.matchMedia();
 
   mm.add("(prefers-reduced-motion: no-preference)", () => {
-    // Progresso da rota: um trecho por marcador, cada um com a duração da distância vertical entre eles,
-    // então a ponta passa em cada marcador exatamente quando ele cruza o meio da tela.
-    // Anima o atributo stroke-dashoffset (unitless, relativo ao pathLength="1")
     let fillTimeline = null;
 
     function createFill() {
@@ -264,14 +303,12 @@ if (timeline) {
           start: () => `top+=${route.ys[0]} ${VIEWPORT_POINT}`,
           end: () => `top+=${route.ys[route.ys.length - 1]} ${VIEWPORT_POINT}`,
           scrub: true,
-          // markers: true,
         },
       });
       for (let i = 1; i < fractions.length; i++) {
         fillTimeline.fromTo(
           routeFill,
           { attr: { "stroke-dashoffset": 1 - fractions[i - 1] } },
-          // Só o 1º trecho aplica o valor inicial na criação; os outros deixariam a rota parcialmente preenchida
           { attr: { "stroke-dashoffset": 1 - fractions[i] }, ease: "none", duration: Math.max(ys[i] - ys[i - 1], 1), immediateRender: i === 1 },
         );
       }
@@ -280,30 +317,12 @@ if (timeline) {
     createFill();
     onRouteChange = createFill;
 
-    // Marcadores: laranja (e losango, nos do meio) quando a rota chega no centro; voltam ao rolar para cima
     markers.forEach((marker) => {
       ScrollTrigger.create({
         trigger: marker,
         start: `center ${VIEWPORT_POINT}`,
-        // markers: true,
         onEnter: () => setMarkerReached(marker, true),
         onLeaveBack: () => setMarkerReached(marker, false),
-      });
-    });
-
-    // Entrada dos itens: fade + sobe, uma vez só
-    items.forEach((item) => {
-      gsap.from(item.querySelector(".timeline-content"), {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: item,
-          start: "top 75%",
-          toggleActions: "play none none none",
-          // markers: true,
-        },
       });
     });
 
@@ -316,7 +335,6 @@ if (timeline) {
     };
   });
 
-  // Movimento reduzido: rota já preenchida e marcadores no estado final, sem giro animado
   mm.add("(prefers-reduced-motion: reduce)", () => {
     routeFill.setAttribute("stroke-dashoffset", 0);
     markers.forEach((marker) => setMarkerReached(marker, true, false));
@@ -327,17 +345,12 @@ if (timeline) {
     };
   });
 
-  // ---------- Recalcular ----------
-
-  // Rota segue a posição real dos marcadores: refaz no resize e quando as imagens terminam de carregar
   function refreshRoute() {
     route = buildRoute();
     onRouteChange();
     ScrollTrigger.refresh();
   }
 
-  // Só a largura muda o layout da timeline. No mobile a barra de endereço muda a altura a cada scroll,
-  // e refazer a rota + ScrollTrigger.refresh() nesses eventos travaria a rolagem
   let resizeTimer;
   let lastWidth = window.innerWidth;
   window.addEventListener("resize", () => {

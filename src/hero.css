@@ -1,25 +1,15 @@
-/* ==========================================================================
-   HERO: parede azul-marinho com granulação, pôster iluminado como obra de galeria.
-   Camadas (de baixo para cima): parede (assets/icons/bg-noise.svg: navy + ruído), .hero-wall-shade (sombra leve da parede),
-   .spotlight (cone, luz, vinheta), conteúdo (z-10).
-   ========================================================================== */
-
 #hero-bg {
-  --spot-intensity: 0.32; /* alfa do creme no centro da luz */
-  --spot-cone: 0; /* cone de luz de cima: 0 = desligado; ~0.08 para ligar */
-  --spot-vignette: 0.42; /* escuro nas bordas e cantos */
-  /* Centro e raios da luz: o script da página atualiza para o centro do pôster */
+  --spot-intensity: 0.32;
+  --spot-vignette: 0.42;
   --spot-x: 75%;
   --spot-y: 50%;
   --spot-rx: 25%;
   --spot-ry: 33%;
-  --wall-shade: 0.22; /* sombra leve da parede (topo e laterais) */
-  --wall-base-shade: 0.35; /* sombra no pé da parede, onde encontra o chão */
+  --wall-shade: 0.22;
+  --wall-base-shade: 0.35;
   background: var(--color-silicon-blue) url("../assets/icons/bg-noise.svg") center / cover;
 }
 
-/* Sombra leve da parede: mais escura junto ao topo e às laterais, como uma parede de galeria fora do foco da luz,
-   e uma faixa curta no pé da parede (canto com o chão) */
 .hero-wall-shade {
   position: absolute;
   inset: 0;
@@ -30,13 +20,10 @@
     linear-gradient(to right, rgb(0 0 0 / calc(var(--wall-shade) * 0.6)), transparent 18%, transparent 82%, rgb(0 0 0 / calc(var(--wall-shade) * 0.6)));
 }
 
-/* ---------- Luz de galeria ---------- */
-
 .spotlight {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  /* Luzes acendendo uma vez no load */
   animation: hero-lights-on 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
@@ -45,19 +32,17 @@
   inset: 0;
 }
 
-/* Luz: elipse creme suave centrada no pôster, queda em 4 paradas */
 .spotlight__light {
   background: radial-gradient(
     ellipse var(--spot-rx) var(--spot-ry) at var(--spot-x) var(--spot-y),
-    color-mix(in srgb, var(--color-cream) calc(var(--spot-intensity) * 100%), transparent) 0%,
-    color-mix(in srgb, var(--color-cream) calc(var(--spot-intensity) * 72%), transparent) 35%,
-    color-mix(in srgb, var(--color-cream) calc(var(--spot-intensity) * 30%), transparent) 68%,
+    color-mix(in srgb, var(--color-off-white) calc(var(--spot-intensity) * 100%), transparent) 0%,
+    color-mix(in srgb, var(--color-off-white) calc(var(--spot-intensity) * 72%), transparent) 35%,
+    color-mix(in srgb, var(--color-off-white) calc(var(--spot-intensity) * 30%), transparent) 68%,
     transparent 100%
   );
   mix-blend-mode: screen;
 }
 
-/* Vinheta: transparente em volta do pôster, escurece bordas e cantos (o texto fica na parte mais escura) */
 .spotlight__vignette {
   background: radial-gradient(
     ellipse farthest-corner at var(--spot-x) var(--spot-y),
@@ -68,31 +53,11 @@
   );
 }
 
-/* Cone opcional (desligado por padrão): trapézio de cima até o pôster, desfocado */
-.spotlight > .spotlight__cone {
-  inset: 0 auto auto calc(var(--spot-x) - 16%);
-  width: 32%;
-  height: var(--spot-y);
-  opacity: var(--spot-cone);
-  filter: blur(28px);
-  mix-blend-mode: screen;
-}
-
-.spotlight__cone::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
-  background: linear-gradient(to bottom, var(--color-cream), transparent);
-}
-
 @keyframes hero-lights-on {
   from {
     opacity: 0;
   }
 }
-
-/* ---------- Pôster como obra pendurada ---------- */
 
 .hero-poster {
   width: fit-content;
@@ -102,7 +67,6 @@
   position: relative;
 }
 
-/* drop-shadow segue o contorno da moldura (o PNG tem margem transparente): sombra grande e suave + sombra de contato */
 .hero-poster__img {
   display: block;
   width: 220px;
@@ -110,8 +74,6 @@
   filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.45)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.45));
 }
 
-/* Desktop: o pôster é dimensionado pela altura da tela para a hero caber no viewport
-   (header + respiros + placa ficam fora dessa conta); no máximo 400px de altura */
 @media (min-width: 768px) {
   .hero-poster__img {
     width: auto;
@@ -119,26 +81,25 @@
   }
 }
 
-/* Queda de luz no próprio pôster: mais claro em cima no centro, mais escuro nos cantos de baixo.
-   Posicionada exatamente sobre a moldura (o PNG tem margem transparente: 3.84% em cima, 2.05% dos lados, 3.13% embaixo) */
 .hero-poster__light {
   position: absolute;
-  inset: 3.84% 2.05% 3.13%;
+  inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 45% at 50% 0%, color-mix(in srgb, var(--color-cream) 45%, transparent), transparent 100%),
+    radial-gradient(ellipse 70% 45% at 50% 0%, color-mix(in srgb, var(--color-off-white) 45%, transparent), transparent 100%),
     radial-gradient(ellipse 110% 85% at 50% 15%, transparent 55%, rgb(0 0 0 / 0.4) 100%);
   mix-blend-mode: soft-light;
 }
-
-/* ---------- Placa de museu: mono, branca, discreta, centralizada sob a moldura ---------- */
 
 .hero-placard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 14px;
-  font-family: var(--font-plex-mono);
+  width: fit-content;
+  margin: 14px auto 0;
+  padding: 6px 12px;
+  background: var(--color-off-white);
+  font-family: var(--font-inconsolata);
   font-size: 10px;
   line-height: 1.5;
   letter-spacing: 0.06em;
@@ -146,14 +107,47 @@
 }
 
 .hero-placard__title {
-  color: var(--color-off-white);
+  color: var(--color-silicon-blue);
 }
 
 .hero-placard__meta {
-  color: color-mix(in srgb, var(--color-off-white) 75%, transparent);
+  color: var(--color-blue-medium);
 }
 
-/* ---------- Mobile: vinheta mais leve ---------- */
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  z-index: 10;
+  translate: -50% 0;
+  color: var(--color-off-white);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.hero-scroll.is-hidden {
+  opacity: 0;
+}
+
+.hero-scroll svg {
+  display: block;
+  width: 24px;
+  height: auto;
+  animation: hero-scroll-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-pulse {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 0.65;
+  }
+
+  50% {
+    scale: 1.12;
+    opacity: 1;
+  }
+}
 
 @media (max-width: 819px) {
   #hero-bg {
@@ -161,9 +155,20 @@
   }
 }
 
-/* Movimento reduzido: luzes já acesas */
+@media (max-width: 767px) {
+  .hero-scroll {
+    bottom: 20px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .spotlight {
     animation: none;
+  }
+
+  .hero-scroll svg {
+    animation: none;
+    scale: 1;
+    opacity: 0.85;
   }
 }

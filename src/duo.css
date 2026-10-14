@@ -1,0 +1,66 @@
+@layer components {
+  .duo {
+    --duo-shadow: var(--color-silicon-blue);
+    --duo-highlight: var(--color-blue-light);
+    --duo-mid: var(--color-blue-medium);
+    --duo-brightness: 1.6;
+    --duo-contrast: 1.1;
+    --duo-dots-opacity: 0.18;
+    --duo-dots-size: 5px;
+    --duo-tint: 1;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--duo-mid) calc(var(--duo-tint) * 100%), transparent);
+  }
+
+  .duo > img {
+    display: block;
+    mix-blend-mode: luminosity;
+    filter: grayscale(var(--duo-tint))
+      brightness(calc(1 + (var(--duo-brightness) - 1) * var(--duo-tint)))
+      contrast(calc(1 + (var(--duo-contrast) - 1) * var(--duo-tint)));
+  }
+
+  .duo::before,
+  .duo::after,
+  .duo > .duo__dots {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .duo::before {
+    z-index: 1;
+    background: var(--duo-highlight);
+    mix-blend-mode: multiply;
+    opacity: var(--duo-tint);
+  }
+
+  .duo > .duo__dots {
+    z-index: 2;
+    background: radial-gradient(circle, var(--duo-shadow) 0.9px, transparent 1.1px) 0 0 / var(--duo-dots-size) var(--duo-dots-size);
+    mix-blend-mode: multiply;
+    opacity: calc(var(--duo-dots-opacity) * var(--duo-tint));
+  }
+
+  .duo::after {
+    z-index: 3;
+    background: var(--duo-shadow);
+    mix-blend-mode: lighten;
+    opacity: var(--duo-tint);
+  }
+
+  @supports not (mix-blend-mode: multiply) {
+    .duo::before,
+    .duo > .duo__dots {
+      display: none;
+    }
+
+    .duo::after {
+      opacity: calc(0.25 * var(--duo-tint));
+    }
+  }
+}
