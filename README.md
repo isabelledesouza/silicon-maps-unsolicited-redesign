@@ -1,22 +1,33 @@
+# Silicon Maps: Independent Redesign Case Study
 
-# Silicon Maps: Unsolicited Redesign
+An independent, speculative redesign of the Silicon Maps website. Silicon Maps publishes printed and digital maps of Silicon Valley. This project shows how its site could tell the story of the business and guide visitors toward becoming sponsors.
 
-A portfolio concept: a redesign of the website of Silicon Maps, a company that publishes printed and digital maps of Silicon Valley.
-
-Live site: https://isabelledesouza.github.io/silicon-maps-unsolicited-redesign/
+Live concept: https://isabelledesouza.github.io/silicon-maps-unsolicited-redesign/
 
 ## Disclaimer
 
-This is an unsolicited redesign concept. Silicon Maps is a fictional company. Its history, figures, clients and testimonials are invented for illustration. Real events from Silicon Valley history appear only as true context. No real company is presented as a client, and no real logos are used.
+This is an independent speculative redesign by Isabelle de Souza. It is not affiliated with, commissioned by or endorsed by Silicon Maps. The copy, member companies, logos and testimonials shown in the concept are illustrative. No real client relationship, results or metrics are claimed. Brand names are used only to identify the company the concept is about.
 
 ## Concept
 
 Idea: **to be on the map is to belong.**
 
-- Audience: B2B. Companies that want to appear on a map that lives on walls and desks for years.
-- Message: belonging and status, with the map as a physical object, not an ad that ends with a campaign.
-- Voice: a single "we", confident and plain. Mostly short sentences, no hype, no invented statistics.
-- Story: Silicon Maps was founded in 1989 in San Jose and has drawn the valley ever since.
+- Audience: B2B. Companies that want a lasting place on a map that lives on walls and desks for years.
+- Direction: reposition the site from a catalog of maps to a legacy brand experience: "More than a map. A piece of Silicon Valley history."
+- Voice: a single "we", confident and plain. Short sentences, no hype, no invented statistics.
+
+## Problems and design direction
+
+Each decision follows the same chain: problem, direction, decision.
+
+| Problem | Direction | Decision |
+| --- | --- | --- |
+| A slider of 15 maps gives no map real attention and reads like a catalog | Tell one story instead of listing products | A single map in the hero, presented as the map, with "Since 1989" |
+| No call to action in the header | Every page needs a way into conversion | A persistent "Join the map" button and a closing contact section |
+| Two long dropdowns of plain links with no hierarchy | Reduce the effort of choosing | One "Maps" mega menu in columns |
+| Testimonials on a disconnected page | Put proof where the decision happens | Testimonial cards on the home page and a Members page |
+| No clear path to pricing | Remove uncertainty before action | "Packages" in the main navigation and a four-step process |
+| The 30+ year history is hidden | Treat the legacy as the central asset | A timeline from 1989 to today, drawn as a route |
 
 ## Page structure
 
@@ -25,11 +36,11 @@ Idea: **to be on the map is to belong.**
 3. "A map that stays in the room": why a printed map outlasts an ad
 4. Stats band: printed, digital, since 1989, worldwide
 5. Testimonial band
-6. Members: three fictional companies with fictional logos and quotes
+6. Members: three illustrative companies with illustrative logos and quotes
 7. Timeline, from 1989 to today: Origin, Paper to pixels, A connected industry, Flat, fast and everywhere, The map continues
 8. Process: how to join, in four steps
 9. Contact band with a dark map background, a press photo and an overlapping card
-10. Footer with the fictional-company disclaimer
+10. Footer with the independent-concept disclaimer
 
 ## Design
 
@@ -61,14 +72,15 @@ Notes:
 
 ## Content rules
 
-- The invented history concerns only Silicon Maps.
-- No fabricated statistics, and no actions attributed to real companies.
-- Testimonials and member companies are labeled as fictional on the page.
+- Facts about the company come only from public information. Anything else is labeled as concept copy.
+- No fabricated statistics, results or metrics, and no actions attributed to real companies.
+- Member companies and testimonials are illustrative and marked as such on the page.
+- Real Silicon Valley events appear only as true context.
 - The phrase "on the map" appears in a single place, the link "See who's on the map". Elsewhere the copy uses other wording to avoid repetition.
 
 ## Images
 
-Some images are AI-generated or stock photography used for the concept. If this project is ever used commercially, replace them with licensed or original photography and review the trade-show photo, whose banner text does not match the fictional brand name.
+Some images are AI-generated or stock photography used for the concept. If this project is ever used beyond a portfolio, replace them with licensed or original photography. The trade-show photo should be replaced or edited, since its banner text does not match the brand name.
 
 ## Run locally
 
